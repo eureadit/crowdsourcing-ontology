@@ -25,7 +25,12 @@
                                                               <https://orcid.org/0000-0002-9272-908X> ,
                                                               <https://orcid.org/0000-0003-3807-5019> ;
                                                    dc:title "Crowdsouring Evidences"@en ;
-                                                   cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ;
+                                                   cp:coversRequirements "What are the outcomes of a crowdsource campaign?"@en ,
+                                                                         "Which organization is organising a crowdsource campaign?"@en ,
+                                                                         "Who is managing what aspect of the campaign?"@en ,
+                                                                         "How is participating and with what role?"@en ;
+                                                   cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ,
+                                                                    <https://dl.acm.org/doi/10.5555/2878937.2878946> ;
                                                    cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
                                                                  <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl> ,
                                                                  <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl> ;
@@ -94,23 +99,26 @@
         dc:description "The type of the resource collected of given as compensation: tangible or intangible"@en ;
         rdfs:label "type of compensation"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#focus
-:focus rdf:type owl:DatatypeProperty ;
-       rdfs:domain owl:Thing ;
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#typeOfOutcome
+:typeOfOutcome rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Resource ;
        rdfs:range [ rdf:type rdfs:Datatype ;
-                    owl:oneOf [ rdf:type rdf:List ;
+                  owl:oneOf [ rdf:type rdf:List ;
                                 rdf:first "knowledge" ;
                                 rdf:rest [ rdf:type rdf:List ;
-                                           rdf:first "resource" ;
+                                           rdf:first "supply" ;
                                            rdf:rest [ rdf:type rdf:List ;
                                                       rdf:first "funding" ;
-                                                      rdf:rest rdf:nil
+                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                 rdf:first "time" ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
                                                     ]
                                          ]
                               ]
                   ] ;
-       dc:description "Crowdsourcing focus is the collection of either knowledge, resource, and funding"@en ;
-       rdfs:label "focus of crowdsouring campaign"@en .
+       dc:description "Crowdsourcing requires or produces: knowledge, resource, funding or time"@en ;
+       rdfs:label "type of outcome"@en .
 
 ###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#maturity
 :effect rdf:type owl:DatatypeProperty ;
@@ -161,12 +169,10 @@ tr:taskOf rdf:type owl:ObjectProperty ;
           dc:description "Organization is organising an crowdsouring campaign"@en ;
           rdfs:label "is organising"@en .
 
-### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#collects
-:collects rdf:type owl:ObjectProperty ;
-          rdfs:domain tr:Task ;
-          rdfs:range :Resource ;
-          dc:description "A crowdsource taks collects a resource"@en ;
-          rdfs:label "collects"@en .
+### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#produces
+actr:produces rdf:type owl:ObjectProperty ;
+          rdfs:domain activ:Activity ;
+          rdfs:range actr:Outcome .
 
 ### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#givesCompensation
 :givesCompensation rdf:type owl:ObjectProperty ;
@@ -174,6 +180,14 @@ tr:taskOf rdf:type owl:ObjectProperty ;
           rdfs:range pe:Person ;
           dc:description "A crowdsource campaign gives a resource as a compensation to partipants"@en ;
           rdfs:label "gives compensation"@en .
+
+
+### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#isFocusedOn
+:focusingOn rdf:type owl:ObjectProperty ;
+          rdfs:domain :Crowdsouring ;
+          rdfs:range :Resource ;
+          dc:description "A crowdsource campaign is focused on producing a resource"@en ;
+          rdfs:label "is focused on"@en .
 
 ###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/hasSubactivity
 activ:hasSubactivity rdf:type owl:ObjectProperty ;
@@ -189,7 +203,7 @@ sch:employee rdf:type owl:ObjectProperty ;
 #    Classes
 #################################################################
 
-### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#Role
+### http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#Agent
 ar:Agent rdf:type owl:Class .
 
 ###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Activity
@@ -218,6 +232,7 @@ tr:Task rdf:type owl:Class ;
 
 ###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Resource
 :Resource rdf:type owl:Class ;
+          rdfs:subClassOf actr:Outcome ;
           dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
           rdfs:label "Resource"@en .
 
@@ -232,6 +247,9 @@ tr:Task rdf:type owl:Class ;
           rdfs:subClassOf or:Role ;
           dc:description "Contributor role of person to the crowdsouring campaign or task"@en ;
           rdfs:label "Crowdsource Contributor"@en .
+
+### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Outcome
+actr:Outcome rdf:type owl:Class .
 
 #################################################################
 #    General axioms
