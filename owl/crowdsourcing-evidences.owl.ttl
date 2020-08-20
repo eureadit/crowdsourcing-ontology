@@ -1,0 +1,246 @@
+@prefix : <http://modellingdh.github.io/ont/odp/term/> .
+@prefix cp: <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/> .
+@prefix or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#> .
+@prefix tr: <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#> .
+@prefix ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#> .
+@prefix sch: <https://schema.org/docs/schemaorg.owl#> .
+@prefix actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#> .
+@prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix pe: <http://www.ontologydesignpatterns.org/cp/owl/persons.owl#> .
+@base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
+
+
+<http://modellingdh.github.io/ont/crowdsouring-evidences> rdf:type owl:Ontology ;
+                                                   owl:versionIRI <https://raw.githubusercontent.com/modellingDH/crowdsourcing-evidences/master/owl/cp_experience.owl.ttl> ;
+                                                   owl:imports <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> ;
+                                                   dc:creator <https://orcid.org/0000-0002-3639-3622> ,
+                                                              <https://orcid.org/0000-0002-9272-908X> ,
+                                                              <https://orcid.org/0000-0003-3807-5019> ;
+                                                   dc:title "Crowdsouring Evidences"@en ;
+                                                   cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ;
+                                                   cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
+                                                                 <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl> ,
+                                                                 <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl> ;
+                                                   cp:hasIntent "to represent the crowdsouring of evidences from the general public for supporting research activities."@en .
+
+
+
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#responsibility
+:responsibility rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Management ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                  owl:oneOf [ rdf:type rdf:List ;
+                              rdf:first "risk" ;
+                              rdf:rest [ rdf:type rdf:List ;
+                                         rdf:first "quality" ;
+                                         rdf:rest [ rdf:type rdf:List ;
+                                                    rdf:first "time horizon" ;
+                                                    rdf:rest rdf:nil
+                                                  ]
+                                       ]
+                            ]
+                  ] ;
+        dc:description "Responsibility of the management role"@en ;
+        rdfs:label "management responsibility"@en .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#platform
+:platform rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Crowdsourcing ;
+        rdfs:range xsd:anyURI ;
+        dc:description "URI of the used crowdsouring platform used"@en ;
+        rdfs:label "crowdsouring platform"@en .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#openess
+:target rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Crowdsourcing ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                   owl:oneOf [ rdf:type rdf:List ;
+                               rdf:first "internal" ;
+                               rdf:rest [ rdf:type rdf:List ;
+                                          rdf:first "external" ;
+                                          rdf:rest rdf:nil
+                                        ]
+                             ]
+                 ] ;
+        dc:description "The target of the crowdsourcing campaign: internal to the organization or external, such as customers, stakeholders or the general public"@en ;
+        rdfs:label "target audience"@en .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#typeOfCompensation
+:typeOfCompensation rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Resource ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                   owl:oneOf [ rdf:type rdf:List ;
+                               rdf:first "tangible" ;
+                               rdf:rest [ rdf:type rdf:List ;
+                                          rdf:first "intangible" ;
+                                          rdf:rest rdf:nil
+                                        ]
+                             ]
+                 ] ;
+        dc:description "The type of the resource collected of given as compensation: tangible or intangible"@en ;
+        rdfs:label "type of compensation"@en .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#focus
+:focus rdf:type owl:DatatypeProperty ;
+       rdfs:domain owl:Thing ;
+       rdfs:range [ rdf:type rdfs:Datatype ;
+                    owl:oneOf [ rdf:type rdf:List ;
+                                rdf:first "knowledge" ;
+                                rdf:rest [ rdf:type rdf:List ;
+                                           rdf:first "resource" ;
+                                           rdf:rest [ rdf:type rdf:List ;
+                                                      rdf:first "funding" ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ]
+                              ]
+                  ] ;
+       dc:description "Crowdsourcing focus is the collection of either knowledge, resource, and funding"@en ;
+       rdfs:label "focus of crowdsouring campaign"@en .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#maturity
+:effect rdf:type owl:DatatypeProperty ;
+        rdfs:domain owl:Thing ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                   owl:oneOf [ rdf:type rdf:List ;
+                               rdf:first "incremental" ;
+                               rdf:rest [ rdf:type rdf:List ;
+                                          rdf:first "generative" ;
+                                          rdf:rest [ rdf:type rdf:List ;
+                                                     rdf:first "innovative" ;
+                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                rdf:first "disruptive" ;
+                                                                rdf:rest rdf:nil
+                                                              ]
+                                                   ]
+                                        ]
+                             ]
+                 ] ;
+        dc:description "Crowdsourcing can have different effects on the organization: (incremental) if it can use crowdsourcing to generate incremental improvements, (generative) when it can use crowdsourcing to generate ideas to incrementally improve specific tactics and strategies, (innovative) if it can use crowdsourcing to effect innovative change in areas that are crucial or exemplary (disruptive) if it can use crowdsourcing to uncover industry-transforming paradigm shifts"@en ;
+        rdfs:label "maturity level of crowdsouring campaign"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#hasRole
+or:hasRole rdf:type owl:ObjectProperty ;
+           rdfs:domain ar:Actor ;
+           rdfs:range or:Role .
+
+### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#isTaskOf
+tr:isTaskOf rdf:type owl:ObjectProperty ;
+          owl:inverseOf tr:taskOf ;
+          rdfs:domain activ:Activity ;
+          rdfs:range or:Role .
+
+### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#taskOf
+tr:taskOf rdf:type owl:ObjectProperty ;
+          owl:inverseOf tr:isTaskOf ;
+          rdfs:domain activ:Activity ;
+          rdfs:range or:Role .
+
+### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#organising
+:organising rdf:type owl:ObjectProperty ;
+          rdfs:domain sch:Organization ;
+          rdfs:range :Crowdsourcing ;
+          dc:description "Organization is organising an crowdsouring campaign"@en ;
+          rdfs:label "is organising"@en .
+
+### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#collects
+:collects rdf:type owl:ObjectProperty ;
+          rdfs:domain tr:Task ;
+          rdfs:range :Resource ;
+          dc:description "A crowdsource taks collects a resource"@en ;
+          rdfs:label "collects"@en .
+
+### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#givesCompensation
+:givesCompensation rdf:type owl:ObjectProperty ;
+          rdfs:domain activ:Activity ;
+          rdfs:range pe:Person ;
+          dc:description "A crowdsource campaign gives a resource as a compensation to partipants"@en ;
+          rdfs:label "gives compensation"@en .
+
+###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/hasSubactivity
+activ:hasSubactivity rdf:type owl:ObjectProperty ;
+          rdfs:domain activ:Activity ;
+          rdfs:range activ:Activity .
+
+### http://schema.org/employee
+sch:employee rdf:type owl:ObjectProperty ;
+          rdfs:domain sch:Organization ;
+          rdfs:range sch:Person .
+
+#################################################################
+#    Classes
+#################################################################
+
+### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#Role
+ar:Agent rdf:type owl:Class .
+
+###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Activity
+activ:Activity rdf:type owl:Class .
+
+###  http://schema.org/Organization
+sch:Organization rdf:type owl:Class ;
+          rdfs:subClassOf activ:Agent .
+
+###  http://www.ontologydesignpatterns.org/cp/owl/persons.owl#Person
+pe:Person rdf:type owl:Class ;
+          rdfs:subClassOf activ:Agent .
+
+### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#Role
+or:Role rdf:type owl:Class .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Crowdsourcing
+:Crowdsourcing rdf:type owl:Class ;
+          rdfs:subClassOf activ:Activity ;
+          dc:description "A crowdsourcing campaign of an organization"@en ;
+          rdfs:label "Crowdsourcing Campaign"@en .
+
+### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#Task
+tr:Task rdf:type owl:Class ;
+          rdfs:subClassOf activ:Activity .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Resource
+:Resource rdf:type owl:Class ;
+          dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
+          rdfs:label "Resource"@en .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Management
+:Management rdf:type owl:Class ;
+          rdfs:subClassOf or:Role ;
+          dc:description "Management role of the crowdsouring campaign"@en ;
+          rdfs:label "Campaign Management"@en .
+
+###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Contributor
+:Contributor rdf:type owl:Class ;
+          rdfs:subClassOf or:Role ;
+          dc:description "Contributor role of person to the crowdsouring campaign or task"@en ;
+          rdfs:label "Crowdsource Contributor"@en .
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ar:Agent
+                sch:Organization
+                or:Role
+                activ:Activity
+              )
+] .
