@@ -25,16 +25,56 @@
                                                               <https://orcid.org/0000-0002-9272-908X> ,
                                                               <https://orcid.org/0000-0003-3807-5019> ;
                                                    dc:title "Crowdsouring Evidences"@en ;
-                                                   cp:coversRequirements "What are the outcomes of a crowdsource campaign?"@en ,
+                                                   cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
                                                                          "Which organization is organising a crowdsource campaign?"@en ,
                                                                          "Who is managing what aspect of the campaign?"@en ,
-                                                                         "How is participating and with what role?"@en ;
+                                                                         "How is contributing to crowdsourcing campaing and producing what outcome?"@en ;
                                                    cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ,
                                                                     <https://dl.acm.org/doi/10.5555/2878937.2878946> ;
                                                    cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
                                                                  <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl> ,
                                                                  <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl> ;
-                                                   cp:hasIntent "to represent the crowdsouring of evidences from the general public for supporting research activities."@en .
+                                                   cp:hasIntent "to represent the crowdsouring of evidences from the general public for supporting research activities."@en ;
+                                                   cp:hasUnitTest """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
+PREFIX actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl>
+SELECT DISTINCT ?outcome WHERE {
+  ?task a :Task ;
+    ?task activ:produces ?outcome .
+  ?outcome a actr:Outcome .
+  ?crowdsourcing a :Crowdsouring ;
+    ?crowdsourcing activ:hasSubactivity ?task .
+  }"""@en ,
+"""PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+SELECT DISTINCT ?organization WHERE {
+   ?organization a :Organization
+      ; ?organization :organising ?crowdsouring
+   . ?crowdsouring a :Crowdsourcing
+}"""@en ,
+"""PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
+PREFIX tr: <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
+PREFIX ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl>
+SELECT DISTINCT ?agent WHERE {
+   ?agent a ar:Agent ;
+    ?agent or:hasRole ?manager ;
+    ?manager a :Management .
+  ?manager tr:isTaskOf ?crowdsourcing ;
+    ?crowdsourcing a :Crowdsouring .
+}"""@en ,
+"""PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
+PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
+PREFIX tr:<http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
+SELECT DISTINCT ?actor WHERE {
+  ?person a :Person ;
+   ?person or:hasRole ?contributor ;
+    ?contributor a :Contributor .
+  ?contributor tr:hasTask ?task ;
+    ?task a tr:Task .
+  ?crowdsourcing a :Crowdsouring ;
+    ?crowdsouring activ:hasSubactivity ?task .
+}"""@en .
 
 
 
@@ -150,17 +190,17 @@ or:hasRole rdf:type owl:ObjectProperty ;
            rdfs:domain ar:Actor ;
            rdfs:range or:Role .
 
-### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#isTaskOf
+### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#isTaskOf
 tr:isTaskOf rdf:type owl:ObjectProperty ;
-          owl:inverseOf tr:taskOf ;
+          owl:inverseOf tr:hasTask ;
           rdfs:domain activ:Activity ;
           rdfs:range or:Role .
 
-### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#taskOf
-tr:taskOf rdf:type owl:ObjectProperty ;
+### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#hasTask
+tr:hasTask rdf:type owl:ObjectProperty ;
           owl:inverseOf tr:isTaskOf ;
-          rdfs:domain activ:Activity ;
-          rdfs:range or:Role .
+          rdfs:domain activ:Role ;
+          rdfs:range or:Activity .
 
 ### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#organising
 :organising rdf:type owl:ObjectProperty ;
