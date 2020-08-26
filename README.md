@@ -58,6 +58,5 @@ Furthermore, the ontology is insired or reuses entities from the following:
 - [AgentRole Ontology Design Pattern](http://ontologydesignpatterns.org/wiki/Submissions:AgentRole)
 - [Objectrole Ontology Design Pattern](http://ontologydesignpatterns.org/wiki/Submissions:Objectrole)
 - [Role task Ontology Design Pattern](http://ontologydesignpatterns.org/wiki/Submissions:Role_task)
-- [W3C Time Ontology](https://www.w3.org/TR/owl-time/)
 
 This work was partially supported by Reading Europe – Advanced Data Inves- tigation Tool (READ-IT), a project funded by the JPI Cultural Heritage under the European Union Horizon 2020 Research and Innovation programme (grant agreement No 699523).
