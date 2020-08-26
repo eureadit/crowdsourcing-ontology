@@ -14,6 +14,40 @@ In the context of research project is often necessary to collect material from a
 ## Usage Example
 This ontology is used to describe the crowdsource campaign of the EU JPI [READ-IT project](https://readit-project.eu/). The crowdsource campaigns are carried along the duration of the project and with different modalities (see [contribute page](https://readit-project.eu/contact/contribute-to-read-it/)), such as physical postcards during events, an online [contribution platform](https://read-it.in-two.com/), conversation with a chatbot [@TellMeWhatUReadingbot](https://t.me/tellmewhatureadingbot).
 
+## JSON-LD
+Support to `json-ld` by including the context in `json-ld/context.json` file.
+```https://github.com/eureadit/crowdsourcing-ontology/raw/master/json-ld/context.json```
+
+Examples are included in the `json-ld/examples/` folder, such as:
+
+```
+{
+  "@context": {
+    "@base" : "http://data.open.ac.uk/read-it/",
+    "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+    "schema": "http://schema.org/",
+    "schema:datePublished":{
+      "@type": "xsd:date"
+    },
+    "schema:dateModified":{
+      "@type": "xsd:date"
+    },
+    "schema:datePublished":{
+      "@type": "xsd:date"
+    },
+    "schema:dateModified":{
+      "@type": "xsd:date"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "co:Question",
+  "@id": "http://data.open.ac.uk/read-it/questions/question-1",
+  "schema:name": "What book changed your life, and why?",
+  "schema:thumbnailUrl":"https://readit-project.eu/wp-content/uploads/sites/362/2019/01/Read-IT-logo-bg.svg",
+  "schema:inLanguage": "en-GB"
+}
+```
+
 ## Acknowledgements
 This ontology is inspired by the following is mostly based on the [Ontology focused crowdsourcing management](https://doi.org/10.1016/j.promfg.2015.07.286) of Ari Sivula, Jussi Kantola. This work is a readaptation as it changes the focus from the organization (e.g. maturity level of the organization) to the operational aspects of the crowdsourcing: the campaigning and production of resources.
 
