@@ -1,0 +1,29 @@
+{
+    "@context": {
+      "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+      "schema": "http://schema.org/",
+      "schema:datePublished":{
+        "@type": "xsd:date"
+      },
+      "schema:dateModified":{
+        "@type": "xsd:date"
+      },
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+	},
+  "@id": "http://data.open.ac.uk/read-it/questions/question-1",
+  "@type": "schema:Question",
+  "schema:suggestedAnswer": {
+    "@id": "http://data.open.ac.uk/read-it/answers/answer-1",
+    "@type": "schema:Answer",
+    "schema:author":"alessio",
+    "schema:url":"https://read-it.in-two.com/alessio/post/88546348",
+    "schema:identifier":"https://read-it.in-two.com/alessio/post/88546348",
+    "schema:text":"<div><!--block-->A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company<\/div>",
+    "schema:datePublished":"Tue, 18 Aug 2020 09:43:28 +0000",
+  	"schema:dateModified":"Tue, 18 Aug 2020 09:43:28 +0000",
+  	"schema:Language":{
+    	"@id":"languages/none",
+    	"schema:name":"Unset"
+    }
+  }
+}
