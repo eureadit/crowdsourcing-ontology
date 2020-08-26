@@ -49,7 +49,7 @@ Examples are included in the `json-ld/examples/` folder, such as:
 ```
 
 ## Acknowledgements
-This ontology is inspired by the following is mostly based on the [Ontology focused crowdsourcing management](https://doi.org/10.1016/j.promfg.2015.07.286) of Ari Sivula, Jussi Kantola. This work is a readaptation as it changes the focus from the organization (e.g. maturity level of the organization) to the operational aspects of the crowdsourcing: the campaigning and production of resources.
+This ontology is inspired by the following is mostly based on the "[Ontology focused crowdsourcing management](https://doi.org/10.1016/j.promfg.2015.07.286)" of Ari Sivula, Jussi Kantola. This work is a readaptation as it changes the focus from the organization (e.g. maturity level of the organization) to the operational aspects of the crowdsourcing: the campaigning and production of resources.
 
 Furthermore, the ontology is insired or reuses entities from the following:
 
