@@ -15,7 +15,6 @@
 @prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix provo: <http://www.w3.org/ns/prov#> .
-@prefix pe: <http://www.ontologydesignpatterns.org/cp/owl/persons.owl#> .
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
 
 
@@ -220,7 +219,7 @@ actr:produces rdf:type owl:ObjectProperty ;
 ### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#givesCompensation
 :givesCompensation rdf:type owl:ObjectProperty ;
           rdfs:domain activ:Activity ;
-          rdfs:range pe:Person ;
+          rdfs:range sch:Person ;
           dc:description "A crowdsource campaign gives a resource as a compensation to partipants"@en ;
           rdfs:label "gives compensation"@en .
 
@@ -261,8 +260,8 @@ activ:Activity rdf:type owl:Class .
 sch:Organization rdf:type owl:Class ;
           rdfs:subClassOf activ:Agent .
 
-###  http://www.ontologydesignpatterns.org/cp/owl/persons.owl#Person
-pe:Person rdf:type owl:Class ;
+###  http://schema.org/Person
+sch:Person rdf:type owl:Class ;
           rdfs:subClassOf activ:Agent .
 
 ### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#Role

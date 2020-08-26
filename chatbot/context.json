@@ -1,4 +1,5 @@
 {
     "@base" : "http://data.open.ac.uk/read-it/",
-    "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#"
+    "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+    "schema":"http://schema.org/"
 }
