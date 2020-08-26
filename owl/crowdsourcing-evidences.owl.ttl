@@ -20,23 +20,23 @@
 
 
 <http://modellingdh.github.io/ont/crowdsouring-evidences> rdf:type owl:Ontology ;
-                                                   owl:versionIRI <https://raw.githubusercontent.com/modellingDH/crowdsourcing-evidences/master/owl/cp_experience.owl.ttl> ;
-                                                   owl:imports <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> ;
-                                                   dc:creator <https://orcid.org/0000-0002-3639-3622> ,
-                                                              <https://orcid.org/0000-0002-9272-908X> ,
-                                                              <https://orcid.org/0000-0003-3807-5019> ;
-                                                   dc:title "Crowdsouring Evidences"@en ;
-                                                   cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
-                                                                         "Which organization is organising a crowdsource campaign?"@en ,
-                                                                         "Who is managing what aspect of the campaign?"@en ,
-                                                                         "Who is contributing to crowdsourcing campaing and producing what outcome?"@en ;
-                                                   cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ,
-                                                                    <https://dl.acm.org/doi/10.5555/2878937.2878946> ;
-                                                   cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
-                                                                 <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl> ,
-                                                                 <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl> ;
-                                                   cp:hasIntent "to represent the crowdsouring of evidences from the general public for supporting research activities."@en ;
-                                                   cp:hasUnitTest """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+  owl:versionIRI <https://raw.githubusercontent.com/modellingDH/crowdsourcing-evidences/master/owl/cp_experience.owl.ttl> ;
+  owl:imports <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> ;
+  dc:creator <https://orcid.org/0000-0002-3639-3622> ,
+            <https://orcid.org/0000-0002-9272-908X> ,
+            <https://orcid.org/0000-0003-3807-5019> ;
+  dc:title "Crowdsouring Evidences"@en ;
+  cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
+                        "Which organization is organising a crowdsource campaign?"@en ,
+                        "Who is managing what aspect of the campaign?"@en ,
+                        "Who is contributing to crowdsourcing campaing and producing what outcome?"@en ;
+  cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ,
+                  <https://dl.acm.org/doi/10.5555/2878937.2878946> ;
+  cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
+                <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl> ,
+                <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl> ;
+  cp:hasIntent "to represent the crowdsouring of evidences from the general public for supporting research activities."@en ;
+  cp:hasUnitTest """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
 PREFIX actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl>
 SELECT DISTINCT ?outcome WHERE {
@@ -302,6 +302,13 @@ actr:Outcome rdf:type owl:Class .
 ### http://www.w3.org/2006/time#DateTimeInterval
 time:DateTimeInterval rdf:type owl:Class .
 
+### http://schema.org/Question
+sch:Question rdf:type owl:Class ;
+  rdfs:subClassOf :Task .
+
+### http://schema.org/CreativeWork
+sch:CreativeWork rdf:type owl:Class ;
+  rdfs:subClassOf :Resource .
 
 #################################################################
 #    General axioms
