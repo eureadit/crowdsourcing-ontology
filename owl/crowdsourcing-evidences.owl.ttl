@@ -190,7 +190,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#hasRole
 or:hasRole rdf:type owl:ObjectProperty ;
-           rdfs:domain ar:Agent ;
+           rdfs:domain activ:Agent ;
            rdfs:range or:Role .
 
 ### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#isTaskOf
@@ -251,7 +251,7 @@ sch:employee rdf:type owl:ObjectProperty ;
 #    Classes
 #################################################################
 
-### http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#Agent
+### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Agent
 activ:Agent rdf:type owl:Class .
 
 ###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Activity
