@@ -13,7 +13,6 @@
 @prefix sch: <https://schema.org/docs/schemaorg.owl#> .
 @prefix actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#> .
 @prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
-@prefix time: <http://www.w3.org/2006/time#> .
 @prefix provo: <http://www.w3.org/ns/prov#> .
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
 
@@ -236,11 +235,6 @@ activ:hasSubactivity rdf:type owl:ObjectProperty ;
           rdfs:domain activ:Activity ;
           rdfs:range activ:Activity .
 
-###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/occursAt
-activ:occursAt rdf:type owl:ObjectProperty ;
-          rdfs:domain activ:Activity ;
-          rdfs:range activ:DateTimeInterval .
-
 ### http://schema.org/employee
 sch:employee rdf:type owl:ObjectProperty ;
           rdfs:domain sch:Organization ;
@@ -297,9 +291,6 @@ tr:Task rdf:type owl:Class ;
 
 ### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Outcome
 actr:Outcome rdf:type owl:Class .
-
-### http://www.w3.org/2006/time#DateTimeInterval
-time:DateTimeInterval rdf:type owl:Class .
 
 ### http://schema.org/Question
 sch:Question rdf:type owl:Class ;

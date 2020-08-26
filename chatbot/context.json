@@ -1,5 +1,12 @@
 {
     "@base" : "http://data.open.ac.uk/read-it/",
     "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
-    "schema":"http://schema.org/"
+    "schema": "http://schema.org/",
+    "schema:datePublished":{
+        "@type": "xsd:date"
+    },
+    "schema:dateModified":{
+        "@type": "xsd:date"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
 }
