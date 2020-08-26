@@ -29,7 +29,7 @@
                                                    cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
                                                                          "Which organization is organising a crowdsource campaign?"@en ,
                                                                          "Who is managing what aspect of the campaign?"@en ,
-                                                                         "How is contributing to crowdsourcing campaing and producing what outcome?"@en ;
+                                                                         "Who is contributing to crowdsourcing campaing and producing what outcome?"@en ;
                                                    cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ,
                                                                     <https://dl.acm.org/doi/10.5555/2878937.2878946> ;
                                                    cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
@@ -67,7 +67,7 @@ SELECT DISTINCT ?agent WHERE {
 PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
 PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
 PREFIX tr:<http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
-SELECT DISTINCT ?actor WHERE {
+SELECT DISTINCT ?person, ?contribution WHERE {
   ?person a :Person ;
    ?person or:hasRole ?contributor ;
     ?contributor a :Contributor .
@@ -75,6 +75,8 @@ SELECT DISTINCT ?actor WHERE {
     ?task a tr:Task .
   ?crowdsourcing a :Crowdsouring ;
     ?crowdsouring activ:hasSubactivity ?task .
+  ?task actr:produces ?contribution ;
+    ?contribution a :Resource .
 }"""@en .
 
 
@@ -188,7 +190,7 @@ SELECT DISTINCT ?actor WHERE {
 
 ### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#hasRole
 or:hasRole rdf:type owl:ObjectProperty ;
-           rdfs:domain ar:Actor ;
+           rdfs:domain ar:Agent ;
            rdfs:range or:Role .
 
 ### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#isTaskOf
