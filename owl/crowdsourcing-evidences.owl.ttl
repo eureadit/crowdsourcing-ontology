@@ -13,6 +13,7 @@
 @prefix sch: <https://schema.org/docs/schemaorg.owl#> .
 @prefix actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#> .
 @prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix provo: <http://www.w3.org/ns/prov#> .
 @prefix pe: <http://www.ontologydesignpatterns.org/cp/owl/persons.owl#> .
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
@@ -28,7 +29,7 @@
                                                    cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
                                                                          "Which organization is organising a crowdsource campaign?"@en ,
                                                                          "Who is managing what aspect of the campaign?"@en ,
-                                                                         "How is contributing to crowdsourcing campaing and producing what outcome?"@en ;
+                                                                         "Who is contributing to crowdsourcing campaing and producing what outcome?"@en ;
                                                    cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ,
                                                                     <https://dl.acm.org/doi/10.5555/2878937.2878946> ;
                                                    cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
@@ -54,9 +55,9 @@ SELECT DISTINCT ?organization WHERE {
 """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
 PREFIX tr: <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
-PREFIX ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl>
+PREFIX activ: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl>
 SELECT DISTINCT ?agent WHERE {
-   ?agent a ar:Agent ;
+   ?agent a activ:Agent ;
     ?agent or:hasRole ?manager ;
     ?manager a :Management .
   ?manager tr:isTaskOf ?crowdsourcing ;
@@ -66,7 +67,7 @@ SELECT DISTINCT ?agent WHERE {
 PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
 PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
 PREFIX tr:<http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
-SELECT DISTINCT ?actor WHERE {
+SELECT DISTINCT ?person, ?contribution WHERE {
   ?person a :Person ;
    ?person or:hasRole ?contributor ;
     ?contributor a :Contributor .
@@ -74,6 +75,8 @@ SELECT DISTINCT ?actor WHERE {
     ?task a tr:Task .
   ?crowdsourcing a :Crowdsouring ;
     ?crowdsouring activ:hasSubactivity ?task .
+  ?task actr:produces ?contribution ;
+    ?contribution a :Resource .
 }"""@en .
 
 
@@ -187,7 +190,7 @@ SELECT DISTINCT ?actor WHERE {
 
 ### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#hasRole
 or:hasRole rdf:type owl:ObjectProperty ;
-           rdfs:domain ar:Actor ;
+           rdfs:domain activ:Agent ;
            rdfs:range or:Role .
 
 ### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#isTaskOf
@@ -234,6 +237,11 @@ activ:hasSubactivity rdf:type owl:ObjectProperty ;
           rdfs:domain activ:Activity ;
           rdfs:range activ:Activity .
 
+###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/occursAt
+activ:occursAt rdf:type owl:ObjectProperty ;
+          rdfs:domain activ:Activity ;
+          rdfs:range activ:DateTimeInterval .
+
 ### http://schema.org/employee
 sch:employee rdf:type owl:ObjectProperty ;
           rdfs:domain sch:Organization ;
@@ -243,8 +251,8 @@ sch:employee rdf:type owl:ObjectProperty ;
 #    Classes
 #################################################################
 
-### http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#Agent
-ar:Agent rdf:type owl:Class .
+### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Agent
+activ:Agent rdf:type owl:Class .
 
 ###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Activity
 activ:Activity rdf:type owl:Class .
@@ -291,12 +299,16 @@ tr:Task rdf:type owl:Class ;
 ### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Outcome
 actr:Outcome rdf:type owl:Class .
 
+### http://www.w3.org/2006/time#DateTimeInterval
+time:DateTimeInterval rdf:type owl:Class .
+
+
 #################################################################
 #    General axioms
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( ar:Agent
+  owl:members ( activ:Agent
                 sch:Organization
                 or:Role
                 activ:Activity
