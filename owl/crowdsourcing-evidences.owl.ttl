@@ -55,9 +55,9 @@ SELECT DISTINCT ?organization WHERE {
 """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
 PREFIX tr: <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
-PREFIX ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl>
+PREFIX activ: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl>
 SELECT DISTINCT ?agent WHERE {
-   ?agent a ar:Agent ;
+   ?agent a activ:Agent ;
     ?agent or:hasRole ?manager ;
     ?manager a :Management .
   ?manager tr:isTaskOf ?crowdsourcing ;
@@ -252,7 +252,7 @@ sch:employee rdf:type owl:ObjectProperty ;
 #################################################################
 
 ### http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#Agent
-ar:Agent rdf:type owl:Class .
+activ:Agent rdf:type owl:Class .
 
 ###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Activity
 activ:Activity rdf:type owl:Class .
@@ -308,7 +308,7 @@ time:DateTimeInterval rdf:type owl:Class .
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( ar:Agent
+  owl:members ( activ:Agent
                 sch:Organization
                 or:Role
                 activ:Activity
