@@ -1,0 +1,55 @@
+{
+    "@context": {
+      "@base" : "http://data.open.ac.uk/read-it/",
+      "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+      "schema": "http://schema.org/",
+      "schema:datePublished":{
+        "@type": "xsd:date"
+      },
+      "schema:dateModified":{
+        "@type": "xsd:date"
+      },
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+	},
+
+  "@id": "http://data.open.ac.uk/read-it/",
+  "@graph": [
+    {
+      "@id": "http://data.open.ac.uk/read-it/campaigns/form-1",
+      "@type": "co:Crowdsourcing",
+      "co:platform": "https://read-it.in-two.com",
+      "co:target":"external",
+      "co:typeOfCompensation": "intangible",
+      "co:typeOfOutcome": "knowledge",
+      "co:maturity": "incremental",
+      "co:hasTask": "http://data.open.ac.uk/read-it/questions/covid-1"
+    },
+    {
+      "@id":"http://data.open.ac.uk/read-it/questions/covid-1",
+      "@type": "co:Question",
+      "co:isTaskOf": "http://data.open.ac.uk/read-it/campaigns/form-1",
+      "schema:name": "During the current COVID-19 pandemic, many of us have turned to books for comfort, reassurance, or escape. What book changed your life, and why?",
+      "schema:contributor":"alessio",
+      "co:produces":"http://data.open.ac.uk/read-it/answer-1",
+      "schema:thumbnailUrl":"https://read-it.in-two.com/imageurl?id=88546348&width=560&url=https%3A%2F%2Fread-it.in-two.com%2Fpublic%2Fimages%2Freadit-postcard.png",
+      "schema:inLanguage": "en-GB"
+    },
+    {
+      "@id":"http://data.open.ac.uk/read-it/answers/answer-1",
+      "@type": "schema:Answer",
+      "schema:author":"alessio",
+      "schema:url":"https://read-it.in-two.com/alessio/post/88546348",
+      "schema:identifier":"https://read-it.in-two.com/alessio/post/88546348",
+      "schema:text":"A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company",
+      "schema:datePublished":"Tue, 18 Aug 2020 09:43:28 +0000",
+    	"schema:dateModified":"Tue, 18 Aug 2020 09:43:28 +0000",
+    	"schema:inLanguage": "Unset"
+    },
+    {
+      "@id":"http://data.open.ac.uk/read-it/contributors/person/alessio",
+      "@type": "co:Person",
+      "schema:identifier":"alessio",
+      "schema:thumbnailUrl":"https://read-it.in-two.com/media/showavatar?username=alessio"
+    }
+  ]
+}

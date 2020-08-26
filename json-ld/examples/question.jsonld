@@ -7,5 +7,6 @@
   "@id": "http://data.open.ac.uk/read-it/questions/question-1",
   "co:isTaskOf": "http://data.open.ac.uk/read-it/campaigns/form-1",
   "schema:name": "During the current COVID-19 pandemic, many of us have turned to books for comfort, reassurance, or escape. What book changed your life, and why?",
-  "schema:thumbnailUrl":"https://read-it.in-two.com/imageurl?id=88546348&width=560&url=https%3A%2F%2Fread-it.in-two.com%2Fpublic%2Fimages%2Freadit-postcard.png"
+  "schema:thumbnailUrl":"https://read-it.in-two.com/imageurl?id=88546348&width=560&url=https%3A%2F%2Fread-it.in-two.com%2Fpublic%2Fimages%2Freadit-postcard.png",
+  "schema:inLanguage": "en-GB"
 }

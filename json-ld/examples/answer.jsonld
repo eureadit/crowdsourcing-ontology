@@ -18,12 +18,9 @@
     "schema:author":"alessio",
     "schema:url":"https://read-it.in-two.com/alessio/post/88546348",
     "schema:identifier":"https://read-it.in-two.com/alessio/post/88546348",
-    "schema:text":"<div><!--block-->A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company<\/div>",
+    "schema:text":"A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company",
     "schema:datePublished":"Tue, 18 Aug 2020 09:43:28 +0000",
   	"schema:dateModified":"Tue, 18 Aug 2020 09:43:28 +0000",
-  	"schema:Language":{
-    	"@id":"languages/none",
-    	"schema:name":"Unset"
-    }
+  	"schema:inLanguage": "Unset"
   }
 }
