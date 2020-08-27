@@ -215,6 +215,12 @@ actr:produces rdf:type owl:ObjectProperty ;
           rdfs:domain activ:Activity ;
           rdfs:range actr:Outcome .
 
+### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#producedBy
+:producedBy rdf:type owl:ObjectProperty ;
+          owl:inverseOf actr:produces ;
+          rdfs:domain activ:Outcome ;
+          rdfs:range actr:Activity .
+
 ### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#givesCompensation
 :givesCompensation rdf:type owl:ObjectProperty ;
           rdfs:domain activ:Activity ;

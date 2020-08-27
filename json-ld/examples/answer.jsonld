@@ -16,6 +16,7 @@
     "@id": "http://data.open.ac.uk/read-it/answers/answer-1",
     "@type": "schema:Answer",
     "schema:author":"alessio",
+    "co:producedBy": "http://data.open.ac.uk/read-it/questions/question-1",
     "schema:url":"https://read-it.in-two.com/alessio/post/88546348",
     "schema:identifier":"https://read-it.in-two.com/alessio/post/88546348",
     "schema:text":"A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company",

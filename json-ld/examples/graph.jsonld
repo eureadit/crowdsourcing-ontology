@@ -25,10 +25,10 @@
       "co:hasTask": "http://data.open.ac.uk/read-it/questions/covid-1"
     },
     {
-      "@id":"http://data.open.ac.uk/read-it/questions/covid-1",
+      "@id":"http://data.open.ac.uk/read-it/questions/question-1",
       "@type": "co:Question",
       "co:isTaskOf": "http://data.open.ac.uk/read-it/campaigns/form-1",
-      "schema:name": "During the current COVID-19 pandemic, many of us have turned to books for comfort, reassurance, or escape. What book changed your life, and why?",
+      "schema:name": "What book changed your life, and why?",
       "schema:contributor":"alessio",
       "co:produces":"http://data.open.ac.uk/read-it/answer-1",
       "schema:thumbnailUrl":"https://read-it.in-two.com/imageurl?id=88546348&width=560&url=https%3A%2F%2Fread-it.in-two.com%2Fpublic%2Fimages%2Freadit-postcard.png",
@@ -40,6 +40,7 @@
       "schema:author":"alessio",
       "schema:url":"https://read-it.in-two.com/alessio/post/88546348",
       "schema:identifier":"https://read-it.in-two.com/alessio/post/88546348",
+      "co:producedBy": "http://data.open.ac.uk/read-it/questions/question-1",
       "schema:text":"A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company",
       "schema:datePublished":"Tue, 18 Aug 2020 09:43:28 +0000",
     	"schema:dateModified":"Tue, 18 Aug 2020 09:43:28 +0000",
