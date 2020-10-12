@@ -32,12 +32,6 @@ Examples are included in the `json-ld/examples/` folder, such as:
     "schema:dateModified":{
       "@type": "xsd:date"
     },
-    "schema:datePublished":{
-      "@type": "xsd:date"
-    },
-    "schema:dateModified":{
-      "@type": "xsd:date"
-    },
     "xsd": "http://www.w3.org/2001/XMLSchema#"
   },
   "@type": "co:Question",
