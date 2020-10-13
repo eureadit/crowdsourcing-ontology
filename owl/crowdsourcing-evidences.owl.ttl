@@ -1,4 +1,4 @@
-@prefix : <http://modellingdh.github.io/ont/odp/term/> .
+@prefix : <http://readit-project/ontology/> .
 @prefix cp: <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -10,9 +10,10 @@
 @prefix or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#> .
 @prefix tr: <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#> .
 @prefix ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#> .
-@prefix sch: <https://schema.org/docs/schemaorg.owl#> .
+@prefix sch: <https://schema.org/> .
 @prefix actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#> .
 @prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
+@prefix reo: <https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#> .
 @prefix provo: <http://www.w3.org/ns/prov#> .
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
 
@@ -85,7 +86,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 #    Data properties
 #################################################################
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#responsibility
+### http://readit-project/ontology/responsibility
 :responsibility rdf:type owl:DatatypeProperty ;
         rdfs:domain :Management ;
         rdfs:range [ rdf:type rdfs:Datatype ;
@@ -103,14 +104,14 @@ SELECT DISTINCT ?person, ?contribution WHERE {
         dc:description "Responsibility of the management role"@en ;
         rdfs:label "management responsibility"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#platform
+### http://readit-project/ontology/platform
 :platform rdf:type owl:DatatypeProperty ;
         rdfs:domain :Crowdsourcing ;
         rdfs:range xsd:anyURI ;
         dc:description "URI of the used crowdsouring platform used"@en ;
         rdfs:label "crowdsouring platform"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#openess
+### http://readit-project/ontology/openess
 :target rdf:type owl:DatatypeProperty ;
         rdfs:domain :Crowdsourcing ;
         rdfs:range [ rdf:type rdfs:Datatype ;
@@ -125,7 +126,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
         dc:description "The target of the crowdsourcing campaign: internal to the organization or external, such as customers, stakeholders or the general public"@en ;
         rdfs:label "target audience"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#typeOfCompensation
+### http://readit-project/ontology/typeOfCompensation
 :typeOfCompensation rdf:type owl:DatatypeProperty ;
         rdfs:domain :Resource ;
         rdfs:range [ rdf:type rdfs:Datatype ;
@@ -140,7 +141,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
         dc:description "The type of the resource collected of given as compensation: tangible or intangible"@en ;
         rdfs:label "type of compensation"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#typeOfOutcome
+### http://readit-project/ontology/typeOfOutcome
 :typeOfOutcome rdf:type owl:DatatypeProperty ;
        rdfs:domain :Resource ;
        rdfs:range [ rdf:type rdfs:Datatype ;
@@ -161,7 +162,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
        dc:description "Crowdsourcing requires or produces: knowledge, resource, funding or time"@en ;
        rdfs:label "type of outcome"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#maturity
+### http://readit-project/ontology/maturity
 :effect rdf:type owl:DatatypeProperty ;
         rdfs:domain owl:Thing ;
         rdfs:range [ rdf:type rdfs:Datatype ;
@@ -182,138 +183,263 @@ SELECT DISTINCT ?person, ?contribution WHERE {
         dc:description "Crowdsourcing can have different effects on the organization: (incremental) if it can use crowdsourcing to generate incremental improvements, (generative) when it can use crowdsourcing to generate ideas to incrementally improve specific tactics and strategies, (innovative) if it can use crowdsourcing to effect innovative change in areas that are crucial or exemplary (disruptive) if it can use crowdsourcing to uncover industry-transforming paradigm shifts"@en ;
         rdfs:label "maturity level of crowdsouring campaign"@en .
 
+
+### http://readit-project/ontology/date
+:date rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Question ;
+  rdfs:domain :Outcome ;
+  rdfs:range xsd:date ;
+  dc:description "TODO"@en ;
+  rdfs:label "date of creation"@en .
+
+### http://readit-project/ontology/text
+:text rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Question ;
+  rdfs:domain :Answer ;
+  rdfs:range xsd:string ;
+  dc:description "TODO"@en ;
+  rdfs:label "text"@en .
+
+### http://readit-project/ontology/inLanguage
+:inLanguage rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf sch:inLanguage ;
+  rdfs:domain :Question ;
+  rdfs:domain :Answer ;
+  rdfs:range xsd:language ;
+  dc:description "TODO"@en ;
+  rdfs:label "in language"@en .
+
 #################################################################
 #    Object Properties
 #################################################################
 
-### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#hasRole
-or:hasRole rdf:type owl:ObjectProperty ;
-           rdfs:domain activ:Agent ;
-           rdfs:range or:Role .
+### http://readit-project/ontology/hasRole
+:hasRole rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf or:hasRole ;
+  rdfs:domain :Agent ;
+  rdfs:range :Role ;
+  dc:description "TODO"@en ;
+  rdfs:label "has role"@en .
 
-### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#isTaskOf
-tr:isTaskOf rdf:type owl:ObjectProperty ;
-          owl:inverseOf tr:hasTask ;
-          rdfs:domain activ:Activity ;
-          rdfs:range or:Role .
+### http://readit-project/ontology/isTaskOf
+:isTaskOf rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf tr:isTaskOf ;
+  owl:inverseOf :hasTask ;
+  rdfs:domain :Activity ;
+  rdfs:range :Role ;
+  dc:description "TODO"@en ;
+  rdfs:label "is task of"@en .
 
-### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#hasTask
-tr:hasTask rdf:type owl:ObjectProperty ;
-          owl:inverseOf tr:isTaskOf ;
-          rdfs:domain activ:Role ;
-          rdfs:range or:Activity .
+### http://readit-project/ontology/hasTask
+:hasTask rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf tr:hasTask ;
+  owl:inverseOf :isTaskOf ;
+  rdfs:domain :Role ;
+  rdfs:range :Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "has task of"@en .
 
-### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#organising
+### http://readit-project/ontology/organising
 :organising rdf:type owl:ObjectProperty ;
-          rdfs:domain sch:Organization ;
-          rdfs:range :Crowdsourcing ;
-          dc:description "Organization is organising an crowdsouring campaign"@en ;
-          rdfs:label "is organising"@en .
+  rdfs:domain :Organization ;
+  rdfs:range :Crowdsourcing ;
+  dc:description "Organization is organising an crowdsouring campaign"@en ;
+  rdfs:label "is organising"@en .
 
-### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#produces
-actr:produces rdf:type owl:ObjectProperty ;
-          rdfs:domain activ:Activity ;
-          rdfs:range actr:Outcome .
+### http://readit-project/ontology/outcome
+:outcome rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf actr:produces ;
+  rdfs:domain :Activity ;
+  rdfs:range :Outcome ;
+  dc:description "TODO"@en ;
+  rdfs:label "outcome"@en .
 
-### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#producedBy
-:producedBy rdf:type owl:ObjectProperty ;
-          owl:inverseOf actr:produces ;
-          rdfs:domain activ:Outcome ;
-          rdfs:range actr:Activity .
+### http://readit-project/ontology/outcomeOf
+:outcomeOf rdf:type owl:ObjectProperty ;
+  owl:inverseOf :produces ;
+  rdfs:domain :Outcome ;
+  rdfs:range :Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "outcome of"@en .
 
-### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#givesCompensation
+### http://readit-project/ontology/givesCompensation
 :givesCompensation rdf:type owl:ObjectProperty ;
-          rdfs:domain activ:Activity ;
-          rdfs:range sch:Person ;
-          dc:description "A crowdsource campaign gives a resource as a compensation to partipants"@en ;
-          rdfs:label "gives compensation"@en .
+  rdfs:domain :Activity ;
+  rdfs:range :Person ;
+  dc:description "A crowdsource campaign gives a resource as a compensation to partipants"@en ;
+  rdfs:label "gives compensation"@en .
 
-
-### http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#isFocusedOn
+### http://readit-project/ontology/isFocusedOn
 :focusingOn rdf:type owl:ObjectProperty ;
-          rdfs:domain :Crowdsouring ;
-          rdfs:range :Resource ;
-          dc:description "A crowdsource campaign is focused on producing a resource"@en ;
-          rdfs:label "is focused on"@en .
+  rdfs:domain :Crowdsouring ;
+  rdfs:range :Resource ;
+  dc:description "A crowdsource campaign is focused on producing a resource"@en ;
+  rdfs:label "is focused on"@en .
 
-###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/hasSubactivity
-activ:hasSubactivity rdf:type owl:ObjectProperty ;
-          rdfs:domain activ:Activity ;
-          rdfs:range activ:Activity .
+###  /hasSubactivity
+:hasSubactivity rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf activ:hasSubactivity ;
+  rdfs:domain :Activity ;
+  rdfs:range :Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "includes activity"@en .
 
-### http://schema.org/employee
-sch:employee rdf:type owl:ObjectProperty ;
-          rdfs:domain sch:Organization ;
-          rdfs:range sch:Person .
+### http://readit-project/ontology/employee
+:employee rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf sch:employee ;
+  rdfs:domain :Organization ;
+  rdfs:range :Person ;
+  dc:description "TODO"@en ;
+  rdfs:label "employee of"@en .
+
+### http://readit-project/ontology/about
+:about rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf sch:about ;
+  rdfs:domain :Prompting ;
+  rdfs:domain :Observation ;
+  rdfs:range :Concept ;
+  dc:description "TODO"@en ;
+  rdfs:label "about concept"@en .
+
+### http://readit-project/ontology/performing
+:performing rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf sch:agent ;
+  rdfs:domain :Agent ;
+  rdfs:range :Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "performing"@en .
+
+### http://readit-project/ontology/suggestedAnswer
+:answer rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf sch:suggestedAnswer ;
+  dc:description "TODO"@en ;
+  rdfs:label "crowdsourced answer"@en .
+
 
 #################################################################
 #    Classes
 #################################################################
 
-### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Agent
-activ:Agent rdf:type owl:Class .
+### http://readit-project/ontology/Agent
+:Agent rdf:type owl:Class ;
+  rdfs:subClassOf activ:Agent ;
+  dc:description "TODO"@en ;
+  rdfs:label "Agent"@en .
 
-###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Activity
-activ:Activity rdf:type owl:Class .
+### http://readit-project/ontology/Activity
+:Activity rdf:type owl:Class ;
+  rdfs:subClassOf sch:Event ;
+  rdfs:subClassOf actr:Activity ;
+  rdfs:subClassOf activ:Activity ;
+  rdfs:subClassOf or:Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "Crowdsourcing Activity"@en .
 
-###  http://schema.org/Organization
-sch:Organization rdf:type owl:Class ;
-          rdfs:subClassOf activ:Agent .
+### http://readit-project/ontology/Organization
+:Organization rdf:type owl:Class ;
+  rdfs:subClassOf sch:Organization ;
+  rdfs:subClassOf activ:Agent ;
+  dc:description "TODO"@en ;
+  rdfs:label "Organization"@en .
 
-###  http://schema.org/Person
-sch:Person rdf:type owl:Class ;
-          rdfs:subClassOf activ:Agent .
+### http://readit-project/ontology/Person
+:Person rdf:type owl:Class ;
+  rdfs:subClassOf sch:Person ;
+  rdfs:subClassOf activ:Agent ;
+  dc:description "TODO"@en ;
+  rdfs:label "Person"@en .
 
-### http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#Role
-or:Role rdf:type owl:Class .
+### http://readit-project/ontology/Role
+:Role rdf:type owl:Class ;
+  rdfs:subClassOf or:Role ;
+  dc:description "TODO"@en ;
+  rdfs:label "Role"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Crowdsourcing
+### http://readit-project/ontology/Crowdsourcing
 :Crowdsourcing rdf:type owl:Class ;
-          rdfs:subClassOf activ:Activity ;
-          dc:description "A crowdsourcing campaign of an organization"@en ;
-          rdfs:label "Crowdsourcing Campaign"@en .
+  rdfs:subClassOf activ:Activity ;
+  dc:description "A crowdsourcing campaign of an organization"@en ;
+  rdfs:label "Crowdsourcing Campaign"@en .
 
-### http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#Task
-tr:Task rdf:type owl:Class ;
-          rdfs:subClassOf activ:Activity .
+### http://readit-project/ontology/Task
+:Task rdf:type owl:Class ;
+  rdfs:subClassOf tr:Task ;
+  rdfs:subClassOf :Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "Crowdsourcing Task"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Resource
+### http://readit-project/ontology/Resource
 :Resource rdf:type owl:Class ;
-          rdfs:subClassOf actr:Outcome ;
-          dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
-          rdfs:label "Resource"@en .
+  rdfs:subClassOf actr:Outcome ;
+  dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
+  rdfs:label "Resource"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Management
+### http://readit-project/ontology/Management
 :Management rdf:type owl:Class ;
-          rdfs:subClassOf or:Role ;
-          dc:description "Management role of the crowdsouring campaign"@en ;
-          rdfs:label "Campaign Management"@en .
+  rdfs:subClassOf or:Role ;
+  dc:description "Management role of the crowdsourcing campaign"@en ;
+  rdfs:label "Campaign Management"@en .
 
-###  http://modellingdh.github.io/ont/odp/crowdsourcing-evidences#Contributor
+### http://readit-project/ontology/Contributor
 :Contributor rdf:type owl:Class ;
-          rdfs:subClassOf or:Role ;
-          dc:description "Contributor role of person to the crowdsouring campaign or task"@en ;
-          rdfs:label "Crowdsource Contributor"@en .
+  rdfs:subClassOf or:Role ;
+  dc:description "Contributor role of person to the crowdsourcing campaign or task"@en ;
+  rdfs:label "Crowdsource Contributor"@en .
 
-### http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Outcome
-actr:Outcome rdf:type owl:Class .
+### http://readit-project/ontology/Outcome
+:Outcome rdf:type owl:Class ;
+  rdfs:subClassOf actr:Outcome ;
+  dc:description "TODO"@en ;
+  rdfs:label "Activity Outcome"@en .
 
-### http://schema.org/Question
-sch:Question rdf:type owl:Class ;
-  rdfs:subClassOf :Task .
+### http://readit-project/ontology/Question
+:Question rdf:type owl:Class ;
+  rdfs:subClassOf sch:Question ;
+  rdfs:subClassOf eo:Prompting ;
+  rdfs:subClassOf :Task ;
+  dc:description "TODO"@en ;
+  rdfs:label "Prompting Question"@en .
 
-### http://schema.org/CreativeWork
-sch:CreativeWork rdf:type owl:Class ;
-  rdfs:subClassOf :Resource .
+### http://readit-project/ontology/Answer
+:Answer rdf:type owl:Class ;
+  rdfs:subClassOf sch:Answer ;
+  rdfs:subClassOf eo:Observation ;
+  dc:description "TODO"@en ;
+  rdfs:label "Crowdsourced Answer"@en .
+
+### http://readit-project/ontology/CreativeWork
+:Resource rdf:type owl:Class ;
+  rdfs:subClassOf sch:CreativeWork ;
+  dc:description "TODO"@en ;
+  rdfs:label "Crowdsourced Resource"@en .
+
+### http://readit-project/ontology/Concept
+:Concept rdf:Type owl:Class ;
+  rdfs:subClassOf reo:Thing ;
+  dc:description "TODO"@en ;
+  rdfs:label "Experiential Concept"@en .
+
+### http://readit-project/ontology/Prompting
+:Prompting rdf:Type owl:Class ;
+  rdfs:subClassOf eo:Prompting ;
+  dc:description "TODO"@en ;
+  rdfs:label "Observation Prompting"@en .
+
+### http://readit-project/ontology/Observation
+:Observation rdf:Type owl:Class ;
+  rdfs:subClassOf eo:Observation ;
+  dc:description "TODO"@en ;
+  rdfs:label "Experience Observation"@en .
+
 
 #################################################################
 #    General axioms
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( activ:Agent
-                sch:Organization
-                or:Role
-                activ:Activity
+  owl:members ( :Agent
+                :Organization
+                :Role
+                :Activity
               )
 ] .

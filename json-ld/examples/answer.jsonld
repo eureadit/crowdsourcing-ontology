@@ -1,27 +1,12 @@
 {
     "@context": {
       "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
-      "schema": "http://schema.org/",
-      "schema:datePublished":{
-        "@type": "xsd:date"
-      },
-      "schema:dateModified":{
-        "@type": "xsd:date"
-      },
-      "xsd": "http://www.w3.org/2001/XMLSchema#"
+      "reo":"https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
 	},
-  "@id": "http://data.open.ac.uk/read-it/questions/question-1",
-  "@type": "schema:Question",
-  "schema:suggestedAnswer": {
-    "@id": "http://data.open.ac.uk/read-it/answers/answer-1",
-    "@type": "schema:Answer",
-    "schema:author":"alessio",
-    "co:producedBy": "http://data.open.ac.uk/read-it/questions/question-1",
-    "schema:url":"https://read-it.in-two.com/alessio/post/88546348",
-    "schema:identifier":"https://read-it.in-two.com/alessio/post/88546348",
-    "schema:text":"A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company",
-    "schema:datePublished":"Tue, 18 Aug 2020 09:43:28 +0000",
-  	"schema:dateModified":"Tue, 18 Aug 2020 09:43:28 +0000",
-  	"schema:inLanguage": "Unset"
-  }
+  "@id": "http://data.open.ac.uk/read-it/answers/answer-1",
+  "@type": "co:Answer",
+  "co:outcomeOf": "http://data.open.ac.uk/read-it/questions/question-1",
+  "co:text":"A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company",
+  "co:date":"Tue, 18 Aug 2020 09:43:28 +0000",
+  "co:inLanguage": "en"
 }
