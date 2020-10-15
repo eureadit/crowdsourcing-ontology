@@ -547,11 +547,11 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   rdfs:subClassOf :Event ;
   rdfs:subClassOf eo:Engagement ;
   dc:description "TODO"@en ;
-  rdfs:label "Activity Engagement"@en
+  rdfs:label "Activity Engagement"@en .
 
 ### http://readit-project/ontology/Experience
-reo:ReadingExperience rdf:Type owl:Class ;
-  rdfs:subClassOf :Engagement .
+### reo:ReadingExperience rdf:Type owl:Class ;
+  ### rdfs:subClassOf :Engagement .
 
 #################################################################
 #    General axioms
