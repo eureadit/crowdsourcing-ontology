@@ -401,7 +401,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 ### http://readit-project/ontology/isReflectionOn
 :isReflectionOn rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf eo:isReflectionOn ;
-  rdds:subPropertyOf oa:hasTarget ;
+  rdfs:subPropertyOf oa:hasTarget ;
   rdfs:domain :Observation ;
   rdfs:range :Engagement ;
   dc:description "TODO"@en ;
