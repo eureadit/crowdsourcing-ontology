@@ -15,6 +15,8 @@
 @prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
 @prefix reo: <https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#> .
 @prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
 
 
@@ -88,114 +90,123 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/responsibility
 :responsibility rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Management ;
-        rdfs:range [ rdf:type rdfs:Datatype ;
-                  owl:oneOf [ rdf:type rdf:List ;
-                              rdf:first "risk" ;
-                              rdf:rest [ rdf:type rdf:List ;
-                                         rdf:first "quality" ;
-                                         rdf:rest [ rdf:type rdf:List ;
-                                                    rdf:first "time horizon" ;
-                                                    rdf:rest rdf:nil
-                                                  ]
-                                       ]
-                            ]
-                  ] ;
-        dc:description "Responsibility of the management role"@en ;
-        rdfs:label "management responsibility"@en .
+  rdfs:domain :Management ;
+  rdfs:range [ rdf:type rdfs:Datatype ;
+            owl:oneOf [ rdf:type rdf:List ;
+                        rdf:first "risk" ;
+                        rdf:rest [ rdf:type rdf:List ;
+                                   rdf:first "quality" ;
+                                   rdf:rest [ rdf:type rdf:List ;
+                                              rdf:first "time horizon" ;
+                                              rdf:rest rdf:nil
+                                            ]
+                                 ]
+                      ]
+            ] ;
+  dc:description "Responsibility of the management role"@en ;
+  rdfs:label "management responsibility"@en .
 
 ### http://readit-project/ontology/platform
 :platform rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Crowdsourcing ;
-        rdfs:range xsd:anyURI ;
-        dc:description "URI of the used crowdsouring platform used"@en ;
-        rdfs:label "crowdsouring platform"@en .
+  rdfs:domain :Crowdsourcing ;
+  rdfs:range xsd:anyURI ;
+  dc:description "URI of the used crowdsouring platform used"@en ;
+  rdfs:label "crowdsouring platform"@en .
 
 ### http://readit-project/ontology/openess
 :target rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Crowdsourcing ;
-        rdfs:range [ rdf:type rdfs:Datatype ;
-                   owl:oneOf [ rdf:type rdf:List ;
-                               rdf:first "internal" ;
-                               rdf:rest [ rdf:type rdf:List ;
-                                          rdf:first "external" ;
-                                          rdf:rest rdf:nil
-                                        ]
-                             ]
-                 ] ;
-        dc:description "The target of the crowdsourcing campaign: internal to the organization or external, such as customers, stakeholders or the general public"@en ;
-        rdfs:label "target audience"@en .
+  rdfs:domain :Crowdsourcing ;
+  rdfs:range [ rdf:type rdfs:Datatype ;
+             owl:oneOf [ rdf:type rdf:List ;
+                         rdf:first "internal" ;
+                         rdf:rest [ rdf:type rdf:List ;
+                                    rdf:first "external" ;
+                                    rdf:rest rdf:nil
+                                  ]
+                       ]
+           ] ;
+  dc:description "The target of the crowdsourcing campaign: internal to the organization or external, such as customers, stakeholders or the general public"@en ;
+  rdfs:label "target audience"@en .
 
 ### http://readit-project/ontology/typeOfCompensation
 :typeOfCompensation rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Resource ;
-        rdfs:range [ rdf:type rdfs:Datatype ;
-                   owl:oneOf [ rdf:type rdf:List ;
-                               rdf:first "tangible" ;
-                               rdf:rest [ rdf:type rdf:List ;
-                                          rdf:first "intangible" ;
-                                          rdf:rest rdf:nil
-                                        ]
-                             ]
-                 ] ;
-        dc:description "The type of the resource collected of given as compensation: tangible or intangible"@en ;
-        rdfs:label "type of compensation"@en .
+  rdfs:domain :Resource ;
+  rdfs:range [ rdf:type rdfs:Datatype ;
+             owl:oneOf [ rdf:type rdf:List ;
+                         rdf:first "tangible" ;
+                         rdf:rest [ rdf:type rdf:List ;
+                                    rdf:first "intangible" ;
+                                    rdf:rest rdf:nil
+                                  ]
+                       ]
+           ] ;
+  dc:description "The type of the resource collected of given as compensation: tangible or intangible"@en ;
+  rdfs:label "type of compensation"@en .
 
 ### http://readit-project/ontology/typeOfOutcome
 :typeOfOutcome rdf:type owl:DatatypeProperty ;
-       rdfs:domain :Resource ;
-       rdfs:range [ rdf:type rdfs:Datatype ;
-                  owl:oneOf [ rdf:type rdf:List ;
-                                rdf:first "knowledge" ;
-                                rdf:rest [ rdf:type rdf:List ;
-                                           rdf:first "supply" ;
-                                           rdf:rest [ rdf:type rdf:List ;
-                                                      rdf:first "funding" ;
-                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                 rdf:first "time" ;
-                                                                 rdf:rest rdf:nil
-                                                               ]
-                                                    ]
-                                         ]
-                              ]
-                  ] ;
-       dc:description "Crowdsourcing requires or produces: knowledge, resource, funding or time"@en ;
-       rdfs:label "type of outcome"@en .
+ rdfs:domain :Resource ;
+ rdfs:range [ rdf:type rdfs:Datatype ;
+            owl:oneOf [ rdf:type rdf:List ;
+                          rdf:first "knowledge" ;
+                          rdf:rest [ rdf:type rdf:List ;
+                                     rdf:first "supply" ;
+                                     rdf:rest [ rdf:type rdf:List ;
+                                                rdf:first "funding" ;
+                                                rdf:rest [ rdf:type rdf:List ;
+                                                           rdf:first "time" ;
+                                                           rdf:rest rdf:nil
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+            ] ;
+ dc:description "Crowdsourcing requires or produces: knowledge, resource, funding or time"@en ;
+ rdfs:label "type of outcome"@en .
 
 ### http://readit-project/ontology/maturity
 :effect rdf:type owl:DatatypeProperty ;
-        rdfs:domain owl:Thing ;
-        rdfs:range [ rdf:type rdfs:Datatype ;
-                   owl:oneOf [ rdf:type rdf:List ;
-                               rdf:first "incremental" ;
-                               rdf:rest [ rdf:type rdf:List ;
-                                          rdf:first "generative" ;
-                                          rdf:rest [ rdf:type rdf:List ;
-                                                     rdf:first "innovative" ;
-                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                rdf:first "disruptive" ;
-                                                                rdf:rest rdf:nil
-                                                              ]
-                                                   ]
-                                        ]
-                             ]
-                 ] ;
-        dc:description "Crowdsourcing can have different effects on the organization: (incremental) if it can use crowdsourcing to generate incremental improvements, (generative) when it can use crowdsourcing to generate ideas to incrementally improve specific tactics and strategies, (innovative) if it can use crowdsourcing to effect innovative change in areas that are crucial or exemplary (disruptive) if it can use crowdsourcing to uncover industry-transforming paradigm shifts"@en ;
-        rdfs:label "maturity level of crowdsouring campaign"@en .
-
+  rdfs:domain owl:Thing ;
+  rdfs:range [ rdf:type rdfs:Datatype ;
+             owl:oneOf [ rdf:type rdf:List ;
+                         rdf:first "incremental" ;
+                         rdf:rest [ rdf:type rdf:List ;
+                                    rdf:first "generative" ;
+                                    rdf:rest [ rdf:type rdf:List ;
+                                               rdf:first "innovative" ;
+                                               rdf:rest [ rdf:type rdf:List ;
+                                                          rdf:first "disruptive" ;
+                                                          rdf:rest rdf:nil
+                                                        ]
+                                             ]
+                                  ]
+                       ]
+           ] ;
+  dc:description "Crowdsourcing can have different effects on the organization: (incremental) if it can use crowdsourcing to generate incremental improvements, (generative) when it can use crowdsourcing to generate ideas to incrementally improve specific tactics and strategies, (innovative) if it can use crowdsourcing to effect innovative change in areas that are crucial or exemplary (disruptive) if it can use crowdsourcing to uncover industry-transforming paradigm shifts"@en ;
+  rdfs:label "maturity level of crowdsouring campaign"@en .
 
 ### http://readit-project/ontology/date
 :date rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf dc:created ;
   rdfs:domain :Question ;
   rdfs:domain :Outcome ;
   rdfs:range xsd:date ;
   dc:description "TODO"@en ;
   rdfs:label "date of creation"@en .
 
+### http://readit-project/ontology/answerText
+:answerText rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf :hasBody ;
+  rdfs:subPropertyOf sch:text ;
+  rdfs:domain :Answer ;
+  rdfs:range xsd:string ;
+  dc:description "TODO"@en ;
+  rdfs:label "text"@en .
+
 ### http://readit-project/ontology/text
 :text rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Question ;
-  rdfs:domain :Answer ;
+  rdfs:subPropertyOf sch:text ;
+  rdfs:domain :Task ;
   rdfs:range xsd:string ;
   dc:description "TODO"@en ;
   rdfs:label "text"@en .
@@ -209,9 +220,44 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   dc:description "TODO"@en ;
   rdfs:label "in language"@en .
 
+### http://readit-project/ontology/aboutConcept
+:aboutConcept rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf dc:subject ;
+  rdfs:subPropertyOf sch:about ;
+  rdfs:domain :Task ;
+  rdfs:domain :Resource ;
+  rdfs:range :Concept ;
+  dc:description "TODO"@en ;
+  rdfs:label "about concept"@en .
+
+
+### http://readit-project/ontology/distance
+:distance rdf:type owl:ObjectProperty ;
+  rdfs:domain :Observation ;
+  rdfs:range [ rdf:type rdfs:Datatype ;
+             owl:oneOf [ rdf:type rdf:List ;
+                         rdf:first "close" ;
+                         rdf:rest [ rdf:type rdf:List ;
+                                    rdf:first "distant" ;
+                                    rdf:rest rdf:nil
+                                  ]
+                       ]
+           ] ;
+  dc:description "TODO"@en ;
+  rdfs:label "temporal distance"@en .
+
+
 #################################################################
 #    Object Properties
 #################################################################
+
+### http://readit-project/ontology/hasBody
+:hasBody rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Task ;
+  rdfs:domain :Resource ;
+  rdfs:range owl:Thing ;
+  dc:description "TODO"@en ;
+  rdfs:label "has body"@en .
 
 ### http://readit-project/ontology/hasRole
 :hasRole rdf:type owl:ObjectProperty ;
@@ -246,9 +292,10 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   dc:description "Organization is organising an crowdsouring campaign"@en ;
   rdfs:label "is organising"@en .
 
-### http://readit-project/ontology/outcome
-:outcome rdf:type owl:ObjectProperty ;
+### http://readit-project/ontology/hasOutcome
+:hasOutcome rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf actr:produces ;
+  owl:inverseOf :outcomeOf ;
   rdfs:domain :Activity ;
   rdfs:range :Outcome ;
   dc:description "TODO"@en ;
@@ -256,7 +303,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/outcomeOf
 :outcomeOf rdf:type owl:ObjectProperty ;
-  owl:inverseOf :produces ;
+  owl:inverseOf :hasOutcome ;
   rdfs:domain :Outcome ;
   rdfs:range :Activity ;
   dc:description "TODO"@en ;
@@ -292,15 +339,6 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   dc:description "TODO"@en ;
   rdfs:label "employee of"@en .
 
-### http://readit-project/ontology/about
-:about rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf sch:about ;
-  rdfs:domain :Prompting ;
-  rdfs:domain :Observation ;
-  rdfs:range :Concept ;
-  dc:description "TODO"@en ;
-  rdfs:label "about concept"@en .
-
 ### http://readit-project/ontology/performing
 :performing rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf sch:agent ;
@@ -309,16 +347,84 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   dc:description "TODO"@en ;
   rdfs:label "performing"@en .
 
-### http://readit-project/ontology/suggestedAnswer
+### http://readit-project/ontology/answer
 :answer rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf sch:suggestedAnswer ;
+  rdfs:domain :Question ;
+  rdfs:range :Answer ;
   dc:description "TODO"@en ;
-  rdfs:label "crowdsourced answer"@en .
+  rdfs:label "sourced answer"@en .
 
+### http://readit-project/ontology/isAnswerOf
+:isAnswerOf rdf:type owl:ObjectProperty ;
+  owl:inverseOf :answer ;
+  rdfs:subPropertyOf oa:hasTarget ;
+  rdfs:subPropertyOf sch:suggestedAnswer ;
+  rdfs:domain :Answer ;
+  rdfs:range :Question ;
+  dc:description "TODO"@en ;
+  rdfs:label "sourced answer"@en .
+
+### http://readit-project/ontology/producesObservation
+:producesObservation rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf oa:motivatedBy ;
+  rdfs:subPropertyOf eo:producesObservation ;
+  rdfs:domain :Prompting ;
+  rdfs:range :Observation ;
+  dc:description "TODO"@en ;
+  rdfs:label "produces observation"@en .
+
+### http://readit-project/ontology/isEngagedIn
+:isEngagedIn rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf eo:isEngagedIn ;
+  rdfs:domain :Person ;
+  rdfs:range :Engagement ;
+  dc:description "TODO"@en ;
+  rdfs:label "is engaged in"@en .
+
+### http://readit-project/ontology/inActivity
+:inActivity rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf eo:inActivity ;
+  rdfs:domain :Engagement ;
+  rdfs:range :Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "in activity"@en .
+
+### http://readit-project/ontology/includes
+:includes rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf eo:includes ;
+  rdfs:domain :Engagement ;
+  rdfs:range :Activity ;
+  dc:description "TODO"@en ;
+  rdfs:label "includes observation"@en .
+
+### http://readit-project/ontology/isReflectionOn
+:isReflectionOn rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf eo:isReflectionOn ;
+  rdds:subPropertyOf oa:hasTarget ;
+  rdfs:domain :Observation ;
+  rdfs:range :Engagement ;
+  dc:description "TODO"@en ;
+  rdfs:label "is relflection on"@en .
+
+:creator rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf dc:creator ;
+  rdfs:subPropertyOf sch:creator ;
+  rdfs:domain :Resource ;
+  rdfs:domain :Activity ;
+  rdfs:rage :Agetn ;
+  dc:description "TODO"@en ;
+  rdfs:labe "creator"@en .
 
 #################################################################
 #    Classes
 #################################################################
+
+### http://readit-project/ontology/TemporalEntity
+:TemporalEntity rdf:type owl:Class ;
+  rdfs:subClassOf time:TemporalEntity ;
+  dc:description "TODO"@en ;
+  rdfs:label "Agent"@en .
 
 ### http://readit-project/ontology/Agent
 :Agent rdf:type owl:Class ;
@@ -328,6 +434,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/Activity
 :Activity rdf:type owl:Class ;
+  rdfs:subClassOf :TemporalEntity ;
   rdfs:subClassOf sch:Event ;
   rdfs:subClassOf actr:Activity ;
   rdfs:subClassOf activ:Activity ;
@@ -351,6 +458,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/Role
 :Role rdf:type owl:Class ;
+  rdfs:subClassOf time:TemporalEntity ;
   rdfs:subClassOf or:Role ;
   dc:description "TODO"@en ;
   rdfs:label "Role"@en .
@@ -404,6 +512,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 :Answer rdf:type owl:Class ;
   rdfs:subClassOf sch:Answer ;
   rdfs:subClassOf eo:Observation ;
+  rdfs:subClassOf oa:Annotation ;
   dc:description "TODO"@en ;
   rdfs:label "Crowdsourced Answer"@en .
 
@@ -427,10 +536,22 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/Observation
 :Observation rdf:Type owl:Class ;
+  rdfs:subClassOf :TemporalEntity ;
   rdfs:subClassOf eo:Observation ;
   dc:description "TODO"@en ;
   rdfs:label "Experience Observation"@en .
 
+### http://readit-project/ontology/Engagement
+:Engagement rdf:Type owl:Class ;
+  rdfs:subClassOf :TemporalEntity ;
+  rdfs:subClassOf :Event ;
+  rdfs:subClassOf eo:Engagement ;
+  dc:description "TODO"@en ;
+  rdfs:label "Activity Engagement"@en
+
+### http://readit-project/ontology/Experience
+reo:ReadingExperience rdf:Type owl:Class ;
+  rdfs:subClassOf :Engagement .
 
 #################################################################
 #    General axioms

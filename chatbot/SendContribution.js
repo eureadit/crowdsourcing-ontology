@@ -1,38 +1,45 @@
 async payload => {
-
   const questions = {
     "443495873": {
       "question": `Do you have a memory of reading that you would like to share?`,
-      "preset":{
-        "co:about": ["reo:Memory", "reo:Content", "reo:ReadingProcess"]
+      "co:Question": {
+        "co:aboutConcept": ["reo:Memory", "reo:Content", "reo:ReadingProcess"]
       }
     },
     "2317837603": {
       "question": `What is a book that changed your life and why?`,
-      "preset":{
-        "co:about": ["reo:Content", "reo:StateOfMind"]
+      "co:Question": {
+          "co:aboutConcept": ["reo:Content", "reo:Achievment"]
+      },
+      "co:Answer": {
+        "co:distance": "distant"
       }
     },
     "2873582813": {
       "question": `What are you reading today and why?`,
-      "preset":{
-        "co:about": ["reo:StateOfMind", "reo:ReadingProcess"]
+      "co:Question": {
+        "co:aboutConcept": ["reo:StateOfMind", "reo:ReadingProcess"]
+      },
+      "co:Answer":{
+        "co:distance": "close"
       }
     },
     "3114555370": {
       "question":`What is a memorable thing you have ever read and why?`,
-      "preset":{
-        "co:about": ["reo:Content", "reo:Memory", ]
+      "co:Question": {
+        "co:aboutConcept": ["reo:Content", "reo:Memory"]
+      },
+      "co:Answer": {
+        "co:distance": "distant"
       }
     },
     "3623227603": {
       "question": `Can you tell me a good reason for reading?`,
-      "preset":{
-        "co:about": ["reo:Habit"]
+      "co:Question": {
+        "co:aboutConcept": ["reo:Habit", "reo:Aim"]
       }
     }
-  }
-
+  };
 
   // hash function
   function hash (str) {
@@ -45,18 +52,13 @@ async payload => {
       h= (h * 33) ^ str.charCodeAt(--i);
     }
     return h >>> 0;
-  }
+  };
 
   /* JSON-LD data structure */
   const context = {
     "@base" : "http://data.open.ac.uk/read-it/",
     "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
-    "reo": "https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#",
-    "schema": "http://schema.org/",
-    "schema:datePublished":{
-      "@type": "xsd:date"
-    },
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "reo": "https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
   };
 
   const aData = {
@@ -65,19 +67,11 @@ async payload => {
     "co:answer": {
       "@id": "http://data.open.ac.uk/read-it/answers/",
       "@type": "co:Answer",
-      "co:producedBy": "http://data.open.ac.uk/read-it/questions/",
-      "schema:text":"",
-      "schema:datePublished":"Tue, 18 Aug 2020 09:43:28 +0000",
-    	"schema:inLanguage": "en-GB"
+      "co:isAnswerOf": "http://data.open.ac.uk/read-it/questions/",
+    	"co:inLanguage": "en-GB"
     }
   };
-  let url;
-  // firebase
-  try {
-    url = await toolbelt.config.get('url');
-  }catch(err){
-    console.error("error flow.ai configuration",err);
-  }
+
 
   // building date
   // format "YY/M/D@H:MM:s"
@@ -99,39 +93,45 @@ async payload => {
   let q = question.pop(), a = answer.pop();
   let entry = {
     date: dformat,
-    question: q.value || "",
-    answer: a.value || ""
+    question: q ? q.value : "",
+    answer: a ? a.value : ""
   }
   entry.id = `chatbot-${hash(entry.question)}`;
   entry.answerId = entry.date.concat("-",entry.id,"-",hash(entry.answer));
   //console.log("entry",entry);
 
+  // fill the data for the db
+  let data = Object.assign({}, context, aData );
+
+
   /**** QUESTION-ANWER ENTRY ****/
   // generate hash id for the question
-  aData["@id"] = aData["@id"].concat(entry.id);
+  data["@id"] = data["@id"].concat(entry.id);
   // fill the question name
-  aData["schema:name"] = entry.question;
+  data["co:text"] = entry.question;
 
-  aData["co:answer"]["@id"] = aData["co:answer"]["@id"].concat(entry.answerId);
-  aData["co:answer"]["co:producedBy"] = aData["@id"];
-  aData["co:answer"]["schema:text"] = entry.answer;
-  aData["co:answer"]["schema:datePublished"] = entry.date;
+  data["co:answer"]["@id"] = data["co:answer"]["@id"].concat(entry.answerId);
+  data["co:answer"]["co:isAnswerOf"] = data["@id"];
+  data["co:answer"]["co:answerText"] = entry.answer;
+  data["co:answer"]["co:date"] = entry.date;
 
-  // add presets
-  let preset = questions[hash(entry.question)].preset || {};
-  aData = Object.assign({},aData,questions[hash(entry.question)]);
-
-
-  // add question
-  let data = Object.assign({}, context, aData);
-
+  // add notes
+  let notes = questions[hash(entry.question)];
+  if(notes && notes["co:Answer"]){
+    data["co:answer"] = Object.assign({}, data["co:answer"], notes["co:Answer"] );
+  }
+  if(notes && notes["co:Question"]){
+    data = Object.assign({}, data, notes["co:Question"]);
+  }
 
   // console.log(data);
 
   // save entry
   try{
-
-    let result = await request({
+    // get firebase url from config
+    const url = await toolbelt.config.get('url');
+    // send data
+    const result = await request({
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       data,
