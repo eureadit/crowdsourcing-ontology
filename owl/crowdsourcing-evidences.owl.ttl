@@ -17,6 +17,7 @@
 @prefix provo: <http://www.w3.org/ns/prov#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
 
 
@@ -220,19 +221,9 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   dc:description "TODO"@en ;
   rdfs:label "in language"@en .
 
-### http://readit-project/ontology/aboutConcept
-:aboutConcept rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf dc:subject ;
-  rdfs:subPropertyOf sch:about ;
-  rdfs:domain :Task ;
-  rdfs:domain :Resource ;
-  rdfs:range :Concept ;
-  dc:description "TODO"@en ;
-  rdfs:label "about concept"@en .
-
 
 ### http://readit-project/ontology/distance
-:distance rdf:type owl:ObjectProperty ;
+:distance rdf:type owl:DatatypeProperty ;
   rdfs:domain :Observation ;
   rdfs:range [ rdf:type rdfs:Datatype ;
              owl:oneOf [ rdf:type rdf:List ;
@@ -251,8 +242,20 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 #    Object Properties
 #################################################################
 
+
+### http://readit-project/ontology/aboutConcept
+:aboutConcept rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf dc:subject ;
+  rdfs:subPropertyOf sch:about ;
+  rdfs:domain :Task ;
+  rdfs:domain :Resource ;
+  rdfs:range :Concept ;
+  dc:description "TODO"@en ;
+  rdfs:label "about concept"@en .
+
+
 ### http://readit-project/ontology/hasBody
-:hasBody rdf:type owl:DatatypeProperty ;
+:hasBody rdf:type owl:ObjectProperty ;
   rdfs:domain :Task ;
   rdfs:domain :Resource ;
   rdfs:range owl:Thing ;
@@ -270,6 +273,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 ### http://readit-project/ontology/isTaskOf
 :isTaskOf rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf tr:isTaskOf ;
+  rdfs:subPropertyOf :notBefore ;
   owl:inverseOf :hasTask ;
   rdfs:domain :Activity ;
   rdfs:range :Role ;
@@ -279,6 +283,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 ### http://readit-project/ontology/hasTask
 :hasTask rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf tr:hasTask ;
+  rdfs:subPropertyOf :notAfter ;
   owl:inverseOf :isTaskOf ;
   rdfs:domain :Role ;
   rdfs:range :Activity ;
@@ -295,6 +300,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 ### http://readit-project/ontology/hasOutcome
 :hasOutcome rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf actr:produces ;
+  rdfs:subPropertyOf :notAfter ;
   owl:inverseOf :outcomeOf ;
   rdfs:domain :Activity ;
   rdfs:range :Outcome ;
@@ -303,6 +309,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/outcomeOf
 :outcomeOf rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore ;
   owl:inverseOf :hasOutcome ;
   rdfs:domain :Outcome ;
   rdfs:range :Activity ;
@@ -367,12 +374,20 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/producesObservation
 :producesObservation rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf oa:motivatedBy ;
   rdfs:subPropertyOf eo:producesObservation ;
+  rdfs:subPropertyOf :notAfter ;
   rdfs:domain :Prompting ;
   rdfs:range :Observation ;
   dc:description "TODO"@en ;
   rdfs:label "produces observation"@en .
+
+### http://readit-project/ontology/oberservationProducedBy
+:oberservationProducedBy rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore ;
+  rdfs:subPropertyOf oa:motivatedBy ;
+  owl:inverseOf :producesObservation ;
+  dc:description "TODO"@en ;
+  rdfs:label "observation produced by"@en .
 
 ### http://readit-project/ontology/isEngagedIn
 :isEngagedIn rdf:type owl:ObjectProperty ;
@@ -407,6 +422,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   dc:description "TODO"@en ;
   rdfs:label "is relflection on"@en .
 
+### http://readit-project/ontology/creator
 :creator rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf dc:creator ;
   rdfs:subPropertyOf sch:creator ;
@@ -415,6 +431,59 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   rdfs:rage :Agetn ;
   dc:description "TODO"@en ;
   rdfs:labe "creator"@en .
+
+
+### http://readit-project/ontology/notBefore
+:notBefore rdf:Type owl:ObjectProperty ;
+  rdfs:domain :TemporalEntity ;
+  rdfs:range :TemporalEntity ;
+  owl:propertyChainAxiom ( :isReflectionOn :inActivity ) ;
+  dc:description "TODO"@en ;
+  rdfs:label "not before"@en .
+
+### http://readit-project/ontology/notAfter
+:notAfter rdf:Type owl:ObjectProperty ;
+  owl:inverseOf :notBefore ;
+  dc:description "TODO"@en ;
+  rdfs:label "not after"@en .
+
+### http://www.w3.org/2006/time#before
+time:before rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notAfter .
+
+### http://www.w3.org/2006/time#after
+time:after rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore .
+
+### http://www.w3.org/2006/time#intervalMeets
+time:intervalMeets rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore .
+
+### http://www.w3.org/2006/time#intervalMetBy
+time:intervalMetBy rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notAfter .
+
+### http://www.w3.org/2006/time#intervalEquals
+time:intervalEquals rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore .
+
+### http://www.w3.org/2006/time#intervalDuring
+time:intervalDuring rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore ;
+  rdfs:subPropertyOf :notAfter .
+
+### http://www.w3.org/2006/time#intervalContains
+time:intervalContains rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore ;
+  rdfs:subPropertyOf :notAfter .
+
+### http://www.w3.org/2006/time#intervalFinishes
+time:intervalFinishes rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notAfter .
+
+### http://www.w3.org/2006/time#intervalFinishedBy
+time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :notBefore .
 
 #################################################################
 #    Classes
@@ -524,6 +593,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/Concept
 :Concept rdf:Type owl:Class ;
+  rdfs:subClassOf skos:Concept ;
   rdfs:subClassOf reo:Thing ;
   dc:description "TODO"@en ;
   rdfs:label "Experiential Concept"@en .
@@ -550,8 +620,9 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   rdfs:label "Activity Engagement"@en .
 
 ### http://readit-project/ontology/Experience
-### reo:ReadingExperience rdf:Type owl:Class ;
-  ### rdfs:subClassOf :Engagement .
+reo:ReadingExperience rdf:Type owl:Class ;
+  rdfs:subClassOf :Engagement .
+
 
 #################################################################
 #    General axioms
