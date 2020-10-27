@@ -1,0 +1,39 @@
+{
+   "@context":{
+      "@base":"http://data.open.ac.uk/read-it/",
+      "co":"https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+      "reo":"https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
+   },
+   "@graph":[
+      {
+         "@id":"http://data.open.ac.uk/read-it/hub/photo-82979649",
+         "@type":"co:MediaResource",
+         "co:platform":"https://read-it.in-two.com",
+         "co:title":"Tagebucheintrag 1979",
+         "co:inLanguage":"unset",
+         "co:abstract":"",
+         "co:url":"https://read-it.in-two.com/READIT/post/82979649",
+         "co:identifier":"https://read-it.in-two.com/READIT/post/82979649",
+         "co:date":"Tue, 09 Jul 2019 14:38:20 +0000",
+         "co:modified":"Thu, 07 Nov 2019 14:09:21 +0000",
+         "co:contentUrl":"https://read-it.in-two.com/READIT/post/82979649/download/b5c4bea2-3b68-45f4-ae00-17ec3f0fc937.JPG",
+         "co:format":"jpg",
+         "thumbnail":"https://read-it.in-two.com/imageurl?id=82979649&width=560&url=https%3A%2F%2Fproc-readit.in-two.com%2Fapi%2Fthumb%2Fget%3Fstage%3DREADIT%26uuid%3Db5c4bea2-3b68-45f4-ae00-17ec3f0fc937.JPG"
+      },
+      {
+         "@id":"http://data.open.ac.uk/read-it/hub/photo-88547280",
+         "@type":"co:MediaResource",
+         "co:platform":"https://read-it.in-two.com",
+         "co:title":"During the current COVID-19 pandemic, many of us have turned to books for comfort, reassurance, or escape. What book changed your life, and why?",
+         "co:inLanguage":"Unset",
+         "co:abstract":"<div><!--block-->A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company</div>",
+         "co:url":"https://read-it.in-two.com/READIT/post/88547280",
+         "co:identifier":"https://read-it.in-two.com/READIT/post/88547280",
+         "co:date":"Tue, 18 Aug 2020 09:43:28 +0000",
+         "co:modified":"Tue, 18 Aug 2020 10:46:29 +0000",
+         "co:contentUrl":"",
+         "co:format":"",
+         "thumbnail":"https://read-it.in-two.com/imageurl?id=88547280&width=560&url=https%3A%2F%2Fread-it.in-two.com%2Fpublic%2Fimages%2Freadit-postcard.png"
+      }
+   ]
+}

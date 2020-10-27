@@ -109,7 +109,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/platform
 :platform rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Crowdsourcing ;
+  rdfs:domain :Activity ;
   rdfs:range xsd:anyURI ;
   dc:description "URI of the used crowdsouring platform used"@en ;
   rdfs:label "crowdsouring platform"@en .
@@ -189,11 +189,18 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 ### http://readit-project/ontology/date
 :date rdf:type owl:DatatypeProperty ;
   rdfs:subPropertyOf dc:created ;
-  rdfs:domain :Question ;
   rdfs:domain :Outcome ;
   rdfs:range xsd:date ;
   dc:description "TODO"@en ;
   rdfs:label "date of creation"@en .
+
+### http://readit-project/ontology/modified
+:modified rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf dc:modified ;
+  rdfs:domain :Outcome ;
+  rdfs:range xsd:date ;
+  dc:description "TODO"@en ;
+  rdfs:label "date modified"@en .
 
 ### http://readit-project/ontology/answerText
 :answerText rdf:type owl:DatatypeProperty ;
@@ -211,6 +218,22 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   rdfs:range xsd:string ;
   dc:description "TODO"@en ;
   rdfs:label "text"@en .
+
+### http://readit-project/ontology/abstract
+:abstract rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf sch:abstract ;
+  rdfs:domain :Outcome ;
+  rdfs:range xsd:string ;
+  dc:description "TODO"@en ;
+  rdfs:label "abstract"@en .
+
+### http://readit-project/ontology/title
+:title rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf sch:title ;
+  rdfs:domain :Resource ;
+  rdfs:range xsd:string ;
+  dc:description "TODO"@en ;
+  rdfs:label "title"@en .
 
 ### http://readit-project/ontology/inLanguage
 :inLanguage rdf:type owl:DatatypeProperty ;
@@ -236,6 +259,38 @@ SELECT DISTINCT ?person, ?contribution WHERE {
            ] ;
   dc:description "TODO"@en ;
   rdfs:label "temporal distance"@en .
+
+### http://readit-project/ontology/url
+:url rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf sch:url ;
+  rdfs:domain :Resource ;
+  rdfs:range xsd:anyURI ;
+  dc:description "TODO"@en ;
+  rdfs:label "url"@en .
+
+### http://readit-project/ontology/identifier
+:identifier rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf sch:identifier ;
+  rdfs:domain :Resource ;
+  rdfs:range xsd:anyURI ;
+  dc:description "TODO"@en ;
+  rdfs:label "identifier"@en .
+
+### http://readit-project/ontology/identifier
+:format rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf sch:encodingFormat ;
+  rdfs:domain :MediaResource ;
+  rdfs:range xsd:string ;
+  dc:description "TODO"@en ;
+  rdfs:label "encoding format"@en .
+
+### http://readit-project/ontology/thumbnail
+:thumbnail rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf sch:thumbnailURL ;
+  rdfs:domain :MediaResource ;
+  rdfs:range xsd:anyURI ;
+  dc:description "TODO"@en ;
+  rdfs:label "thumbnail url"@en .
 
 
 #################################################################
@@ -550,6 +605,12 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
   rdfs:subClassOf actr:Outcome ;
   dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
   rdfs:label "Resource"@en .
+
+### http://readit-project/ontology/MediaObject
+:MediaResource rdf:type owl:Class ;
+  rdfs:subClassOf sch:MediaObject ;
+  dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
+  rdfs:label "Media Resource"@en .
 
 ### http://readit-project/ontology/Management
 :Management rdf:type owl:Class ;

@@ -1,0 +1,56 @@
+{
+   "name":"results",
+   "children":[
+      {
+         "title":"Tagebucheintrag 1979",
+         "linkURL":"https://read-it.in-two.com/READIT/post/82979649",
+         "sourceURL":"https://read-it.in-two.com/READIT/post/82979649",
+         "avatarURL":"https://read-it.in-two.com/media/showavatar?username=READIT&filename=75d8b7bb-c7aa-43a6-803c-cf2301a10b51",
+         "mediaThumbURL":"https://read-it.in-two.com/imageurl?id=82979649&width=560&url=https%3A%2F%2Fproc-readit.in-two.com%2Fapi%2Fthumb%2Fget%3Fstage%3DREADIT%26uuid%3Db5c4bea2-3b68-45f4-ae00-17ec3f0fc937.JPG",
+         "type":"photo",
+         "where":"hub",
+         "who":"READIT",
+         "description":"",
+         "tags":"crowdsourced",
+         "itemType":"media",
+         "file":"https://read-it.in-two.com/READIT/post/82979649/download",
+         "fileName":"b5c4bea2-3b68-45f4-ae00-17ec3f0fc937.JPG",
+         "pubDate":"Tue, 09 Jul 2019 14:38:20 +0000",
+         "dateUpdated":"Thu, 07 Nov 2019 14:09:21 +0000",
+         "language":"",
+         "location":{
+            "latitude":"0.0",
+            "longitude":"0.0",
+            "place":"Ungeotagged"
+         }
+      },
+     {
+       "title":"During the current COVID-19 pandemic, many of us have turned to books for comfort, reassurance, or escape. What book changed your life, and why?",
+       "linkURL":"https://read-it.in-two.com/READIT/post/88547280",
+       "sourceURL":"https://read-it.in-two.com/READIT/post/88547280",
+       "avatarURL":"https://read-it.in-two.com/media/showavatar?username=READIT&filename=75d8b7bb-c7aa-43a6-803c-cf2301a10b51",
+       "mediaThumbURL":"https://read-it.in-two.com/imageurl?id=88547280&width=560&url=https%3A%2F%2Fread-it.in-two.com%2Fpublic%2Fimages%2Freadit-postcard.png",
+       "type":"photo",
+       "where":"hub",
+       "who":"READIT",
+       "description":"<div><!--block-->A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company<\/div>",
+       "tags":"Campaign",
+       "itemType":"media",
+       "file":"",
+       "fileName":"",
+       "pubDate":"Tue, 18 Aug 2020 09:43:28 +0000",
+       "dateUpdated":"Tue, 18 Aug 2020 10:46:29 +0000",
+       "language":"Unset",
+       "location":{
+          "latitude":"0.0",
+          "longitude":"0.0",
+          "place":"Ungeotagged"
+       }
+    }
+   ],
+   "page_current":"1",
+   "page_prev":"",
+   "page_next":"",
+   "page_size":"96",
+   "page_total":"1"
+}

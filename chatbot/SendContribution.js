@@ -56,9 +56,11 @@ async payload => {
 
   /* JSON-LD data structure */
   const context = {
-    "@base" : "http://data.open.ac.uk/read-it/",
-    "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
-    "reo": "https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
+    "@context":{
+      "@base" : "http://data.open.ac.uk/read-it/",
+      "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+      "reo": "https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
+    }
   };
 
   const aData = {
