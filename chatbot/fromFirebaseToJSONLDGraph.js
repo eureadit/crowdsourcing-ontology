@@ -485,6 +485,7 @@ const results = Object.keys(data).reduce((r,k)=>{
     "@id":e["@id"],
     "@type":"co:Question",
     "co:text":e["co:text"],
+    "co:platform":e["co:platform"],
     "co:answer":Object.assign({},e["co:answer"]),
     "co:about": e["co:about"]
   });
