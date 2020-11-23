@@ -540,6 +540,38 @@ time:intervalFinishes rdf:Type owl:ObjectProperty ;
 time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
   rdfs:subPropertyOf :notBefore .
 
+### http://readit-project/ontology/isRelatedToTask
+:isRelatedToTask rdf:Type owl:ObjectProperty ,
+  owl:TransitiveProperty ;
+  rdfs:domain :Task ;
+  rdfs:range :Task ;
+  dc:description "TODO"@en ;
+  rdfs:label "is related to tasks" .
+
+### http://readit-project/ontology/isTranslationOfTask
+:isTranslationOfTask rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :taskIsRelatedTo ;
+  dc:description "TODO"@en ;
+  rdfs:label "is translation of task" .
+
+### http://readit-project/ontology/translatedByTask
+:translatedByTask rdf:Type owl:ObjectProperty ;
+  owl:inverseOf :translatingTask ;
+  dc:description "TODO"@en ;
+  rdfs:label "is translated by task" .
+
+### http://readit-project/ontology/followedByTask
+:followedByTask rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf :taskIsRelatedTo ;
+  dc:description "TODO"@en ;
+  rdfs:label "followed by task" .
+
+### http://readit-project/ontology/followsTask
+:followsTask rdf:Type owl:ObjectProperty ;
+  owl:inverseOf :taskIsFollowedUpBy ;
+  dc:description "TODO"@en ;
+  rdfs:label "follows task" .
+
 #################################################################
 #    Classes
 #################################################################
@@ -589,7 +621,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 
 ### http://readit-project/ontology/Crowdsourcing
 :Crowdsourcing rdf:type owl:Class ;
-  rdfs:subClassOf activ:Activity ;
+  rdfs:subClassOf :Activity ;
   dc:description "A crowdsourcing campaign of an organization"@en ;
   rdfs:label "Crowdsourcing Campaign"@en .
 
