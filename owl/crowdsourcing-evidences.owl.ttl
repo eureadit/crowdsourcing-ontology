@@ -18,6 +18,7 @@
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
 
 
@@ -431,6 +432,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 :producesObservation rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf eo:producesObservation ;
   rdfs:subPropertyOf :notAfter ;
+  rdfs:subPropertyOf prov:wasGeneratedBy ;
   rdfs:domain :Prompting ;
   rdfs:range :Observation ;
   dc:description "TODO"@en ;
@@ -463,6 +465,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 ### http://readit-project/ontology/includes
 :includes rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf eo:includes ;
+  rdfs:subProperty prov:used ;
   rdfs:domain :Engagement ;
   rdfs:range :Activity ;
   dc:description "TODO"@en ;
@@ -483,7 +486,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
   rdfs:subPropertyOf sch:creator ;
   rdfs:domain :Resource ;
   rdfs:domain :Activity ;
-  rdfs:rage :Agetn ;
+  rdfs:rage :Agent ;
   dc:description "TODO"@en ;
   rdfs:labe "creator"@en .
 
@@ -572,6 +575,24 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
   dc:description "TODO"@en ;
   rdfs:label "follows task" .
 
+### http://readit-project/ontology/wasAssociatedWith
+:wasAssociatedWith rdf:Type owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:wasAssociatedWith ;
+  rdfs:domain :Person ;
+  rdfs:range :Activity ;
+  owl:propertyChainAxiom ( :isEngagedIn :inActivity ) ;
+  dc:description "TODO"@en ;
+  rdfs:label "was associated with" .
+
+  ### http://readit-project/ontology/wasAttributedTo
+  :wasAttributedTo rdf:Type owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:wasAttributedTo ;
+    rdfs:domain :Person ;
+    rdfs:range :Resource ;
+    owl:propertyChainAxiom ( :isReflectionOn :inActivity :wasAssociatedWith ) ;
+    dc:description "TODO"@en ;
+    rdfs:label "was attributed to" .
+
 #################################################################
 #    Classes
 #################################################################
@@ -579,62 +600,65 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 ### http://readit-project/ontology/TemporalEntity
 :TemporalEntity rdf:type owl:Class ;
   rdfs:subClassOf time:TemporalEntity ;
-  dc:description "TODO"@en ;
-  rdfs:label "Agent"@en .
+  dc:description "A temporal interval or instant."@en ;
+  rdfs:label "Temporal entity"@en .
 
 ### http://readit-project/ontology/Agent
 :Agent rdf:type owl:Class ;
   rdfs:subClassOf activ:Agent ;
-  dc:description "TODO"@en ;
+  rdfs:subClassOf prov:Agent ;
+  dc:description "Entity that can perform activities."@en ;
   rdfs:label "Agent"@en .
 
 ### http://readit-project/ontology/Activity
 :Activity rdf:type owl:Class ;
+  rdfs:subClassOf prov:Activity ;
   rdfs:subClassOf :TemporalEntity ;
   rdfs:subClassOf sch:Event ;
   rdfs:subClassOf actr:Activity ;
   rdfs:subClassOf activ:Activity ;
   rdfs:subClassOf or:Activity ;
-  dc:description "TODO"@en ;
+  dc:description "Set of tasks aimed to collect resources from users."@en ;
   rdfs:label "Crowdsourcing Activity"@en .
 
 ### http://readit-project/ontology/Organization
 :Organization rdf:type owl:Class ;
   rdfs:subClassOf sch:Organization ;
   rdfs:subClassOf activ:Agent ;
-  dc:description "TODO"@en ;
+  dc:description "Organised group of agents."@en ;
   rdfs:label "Organization"@en .
 
 ### http://readit-project/ontology/Person
 :Person rdf:type owl:Class ;
   rdfs:subClassOf sch:Person ;
   rdfs:subClassOf activ:Agent ;
-  dc:description "TODO"@en ;
+  dc:description "Human agent."@en ;
   rdfs:label "Person"@en .
 
 ### http://readit-project/ontology/Role
 :Role rdf:type owl:Class ;
   rdfs:subClassOf time:TemporalEntity ;
   rdfs:subClassOf or:Role ;
-  dc:description "TODO"@en ;
+  dc:description "Function of an agent within an organization or an activity."@en ;
   rdfs:label "Role"@en .
 
 ### http://readit-project/ontology/Crowdsourcing
 :Crowdsourcing rdf:type owl:Class ;
   rdfs:subClassOf :Activity ;
-  dc:description "A crowdsourcing campaign of an organization"@en ;
+  dc:description "A crowdsourcing campaign of an organization."@en ;
   rdfs:label "Crowdsourcing Campaign"@en .
 
 ### http://readit-project/ontology/Task
 :Task rdf:type owl:Class ;
   rdfs:subClassOf tr:Task ;
   rdfs:subClassOf :Activity ;
-  dc:description "TODO"@en ;
+  dc:description "Action required as part of an activity."@en ;
   rdfs:label "Crowdsourcing Task"@en .
 
 ### http://readit-project/ontology/Resource
 :Resource rdf:type owl:Class ;
   rdfs:subClassOf actr:Outcome ;
+  rdfs:subClassOf prov:Entity ;
   dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
   rdfs:label "Resource"@en .
 
@@ -659,7 +683,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 ### http://readit-project/ontology/Outcome
 :Outcome rdf:type owl:Class ;
   rdfs:subClassOf actr:Outcome ;
-  dc:description "TODO"@en ;
+  dc:description "Entity result of an activity."@en ;
   rdfs:label "Activity Outcome"@en .
 
 ### http://readit-project/ontology/Question
@@ -667,7 +691,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
   rdfs:subClassOf sch:Question ;
   rdfs:subClassOf eo:Prompting ;
   rdfs:subClassOf :Task ;
-  dc:description "TODO"@en ;
+  dc:description "Crowdsourcing task formulated as a question."@en ;
   rdfs:label "Prompting Question"@en .
 
 ### http://readit-project/ontology/Answer
@@ -675,33 +699,34 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
   rdfs:subClassOf sch:Answer ;
   rdfs:subClassOf eo:Observation ;
   rdfs:subClassOf oa:Annotation ;
-  dc:description "TODO"@en ;
+  dc:description "User answer to a question task."@en ;
   rdfs:label "Crowdsourced Answer"@en .
 
 ### http://readit-project/ontology/CreativeWork
 :Resource rdf:type owl:Class ;
   rdfs:subClassOf sch:CreativeWork ;
-  dc:description "TODO"@en ;
+  dc:description "Entity generated by a crowdsourcing activity."@en ;
   rdfs:label "Crowdsourced Resource"@en .
 
 ### http://readit-project/ontology/Concept
 :Concept rdf:Type owl:Class ;
   rdfs:subClassOf skos:Concept ;
   rdfs:subClassOf reo:Thing ;
-  dc:description "TODO"@en ;
+  dc:description "Abstract entity such as ideas."@en ;
   rdfs:label "Experiential Concept"@en .
 
 ### http://readit-project/ontology/Prompting
 :Prompting rdf:Type owl:Class ;
   rdfs:subClassOf eo:Prompting ;
-  dc:description "TODO"@en ;
+  dc:description "Activity aimed to generate an Observation as outcome."@en ;
   rdfs:label "Observation Prompting"@en .
 
 ### http://readit-project/ontology/Observation
 :Observation rdf:Type owl:Class ;
   rdfs:subClassOf :TemporalEntity ;
+  rdfs:subClassOf :Outcome ;
   rdfs:subClassOf eo:Observation ;
-  dc:description "TODO"@en ;
+  dc:description "Testimony or evidence of an experience generated by a prompting activity."@en ;
   rdfs:label "Experience Observation"@en .
 
 ### http://readit-project/ontology/Engagement
@@ -709,7 +734,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
   rdfs:subClassOf :TemporalEntity ;
   rdfs:subClassOf :Event ;
   rdfs:subClassOf eo:Engagement ;
-  dc:description "TODO"@en ;
+  dc:description "Enagement represents the involvement of a Person in an Activity. Engagement is the reification of the relations between Actor, Activity and Observation, as an Observation is a reflection on neither the Person or Activity individually, but it is a reflection on the Engagement (of a Person in an Activity)."@en ;
   rdfs:label "Activity Engagement"@en .
 
 ### http://readit-project/ontology/Experience
