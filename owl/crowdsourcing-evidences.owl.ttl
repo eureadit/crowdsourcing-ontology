@@ -664,6 +664,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 
 ### http://readit-project/ontology/MediaObject
 :MediaResource rdf:type owl:Class ;
+  rdfs:subClassOf :Resource ;
   rdfs:subClassOf sch:MediaObject ;
   dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
   rdfs:label "Media Resource"@en .
