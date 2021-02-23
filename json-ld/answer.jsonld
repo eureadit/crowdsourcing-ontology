@@ -1,0 +1,12 @@
+{
+  "@context": {
+      "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+      "reo":"https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
+	},
+  "@id": "http://data.open.ac.uk/read-it/answers/answer-1",
+  "@type": "co:Answer",
+  "co:outcomeOf": "http://data.open.ac.uk/read-it/questions/question-1",
+  "co:text":"A korean light novel \"Omiscient Reader's Viewpoint\" is keeping me company",
+  "co:date":"Tue, 18 Aug 2020 09:43:28 +0000",
+  "co:inLanguage": "en"
+}

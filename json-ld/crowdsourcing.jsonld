@@ -1,0 +1,20 @@
+{
+  "@context": {
+    "@base":"http://data.open.ac.uk/read-it/",
+    "co":"https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+    "reo":"https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
+  },
+  "@id": "http://data.open.ac.uk/read-it/campaigns/form-1",
+  "@type": "co:Crowdsourcing",
+  "co:platform": "https://read-it.in-two.com",
+  "co:target":"external",
+  "co:typeOfCompensation": "intangible",
+  "co:typeOfOutcome": "knowledge",
+  "co:maturity": "incremental",
+  "co:date": "2020-08-01",
+  "co:hasTask": {
+    "@id":"http://data.open.ac.uk/read-it/questions/covid-1",
+    "@type":"co:Question",
+    "co:text": "During the current COVID-19 pandemic, many of us have turned to books for comfort, reassurance, or escape. What book changed your life, and why?"
+  }
+}

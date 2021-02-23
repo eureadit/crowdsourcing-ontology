@@ -1,0 +1,11 @@
+{
+  "@context": {
+      "co": "https://github.com/eureadit/crowdsourcing-ontology/raw/master/owl/crowdsourcing-evidences.owl.ttl#",
+      "reo":"https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#"
+	},
+  "@type": "co:Question",
+  "@id": "http://data.open.ac.uk/read-it/questions/question-1",
+  "co:text": "During the current COVID-19 pandemic, many of us have turned to books for comfort, reassurance, or escape. What book changed your life, and why?",
+  "co:inLanguage": "en-GB",
+  "co:about": "reo:StateOfMind"
+}
