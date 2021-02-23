@@ -12,7 +12,7 @@
 @prefix ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#> .
 @prefix sch: <https://schema.org/> .
 @prefix actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#> .
-@prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
+@prefix eo: <http://modellingdh.github.io/ont/odp/term/> .
 @prefix reo: <https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#> .
 @prefix provo: <http://www.w3.org/ns/prov#> .
 @prefix time: <http://www.w3.org/2006/time#> .
@@ -22,13 +22,13 @@
 @base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
 
 
-<http://modellingdh.github.io/ont/crowdsouring-evidences> rdf:type owl:Ontology ;
+<http://modellingdh.github.io/ont/crowdsourcing-evidences> rdf:type owl:Ontology ;
   owl:versionIRI <https://raw.githubusercontent.com/modellingDH/crowdsourcing-evidences/master/owl/cp_experience.owl.ttl> ;
   owl:imports <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> ;
   dc:creator <https://orcid.org/0000-0002-3639-3622> ,
             <https://orcid.org/0000-0002-9272-908X> ,
             <https://orcid.org/0000-0003-3807-5019> ;
-  dc:title "Crowdsouring Evidences"@en ;
+  dc:title "Crowdsourcing Evidences"@en ;
   cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
                         "Which organization is organising a crowdsource campaign?"@en ,
                         "Who is managing what aspect of the campaign?"@en ,
@@ -38,7 +38,7 @@
   cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
                 <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl> ,
                 <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl> ;
-  cp:hasIntent "to represent the crowdsouring of evidences from the general public for supporting research activities."@en ;
+  cp:hasIntent "to represent the crowdsourcing of evidences from the general public for supporting research activities."@en ;
   cp:hasUnitTest """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
 PREFIX actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl>
@@ -46,14 +46,14 @@ SELECT DISTINCT ?outcome WHERE {
   ?task a :Task ;
     ?task activ:produces ?outcome .
   ?outcome a actr:Outcome .
-  ?crowdsourcing a :Crowdsouring ;
+  ?crowdsourcing a :Crowdsourcing ;
     ?crowdsourcing activ:hasSubactivity ?task .
   }"""@en ,
 """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 SELECT DISTINCT ?organization WHERE {
    ?organization a :Organization
-      ; ?organization :organising ?crowdsouring
-   . ?crowdsouring a :Crowdsourcing
+      ; ?organization :organising ?crowdsourcing
+   . ?crowdsourcing a :Crowdsourcing
 }"""@en ,
 """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
@@ -64,7 +64,7 @@ SELECT DISTINCT ?agent WHERE {
     ?agent or:hasRole ?manager ;
     ?manager a :Management .
   ?manager tr:isTaskOf ?crowdsourcing ;
-    ?crowdsourcing a :Crowdsouring .
+    ?crowdsourcing a :Crowdsourcing .
 }"""@en ,
 """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
@@ -76,8 +76,8 @@ SELECT DISTINCT ?person, ?contribution WHERE {
     ?contributor a :Contributor .
   ?contributor tr:hasTask ?task ;
     ?task a tr:Task .
-  ?crowdsourcing a :Crowdsouring ;
-    ?crowdsouring activ:hasSubactivity ?task .
+  ?crowdsourcing a :Crowdsourcing ;
+    ?crowdsourcing activ:hasSubactivity ?task .
   ?task actr:produces ?contribution ;
     ?contribution a :Resource .
 }"""@en .
@@ -112,8 +112,8 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 :platform rdf:type owl:DatatypeProperty ;
   rdfs:domain :Activity ;
   rdfs:range xsd:anyURI ;
-  dc:description "URI of the used crowdsouring platform used"@en ;
-  rdfs:label "crowdsouring platform"@en .
+  dc:description "URI of the used crowdsourcing platform used"@en ;
+  rdfs:label "crowdsourcing platform"@en .
 
 ### http://readit-project/ontology/openess
 :target rdf:type owl:DatatypeProperty ;
@@ -185,7 +185,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
                        ]
            ] ;
   dc:description "Crowdsourcing can have different effects on the organization: (incremental) if it can use crowdsourcing to generate incremental improvements, (generative) when it can use crowdsourcing to generate ideas to incrementally improve specific tactics and strategies, (innovative) if it can use crowdsourcing to effect innovative change in areas that are crucial or exemplary (disruptive) if it can use crowdsourcing to uncover industry-transforming paradigm shifts"@en ;
-  rdfs:label "maturity level of crowdsouring campaign"@en .
+  rdfs:label "maturity level of crowdsourcing campaign"@en .
 
 ### http://readit-project/ontology/date
 :date rdf:type owl:DatatypeProperty ;
@@ -350,7 +350,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 :organising rdf:type owl:ObjectProperty ;
   rdfs:domain :Organization ;
   rdfs:range :Crowdsourcing ;
-  dc:description "Organization is organising an crowdsouring campaign"@en ;
+  dc:description "Organization is organising an crowdsourcing campaign"@en ;
   rdfs:label "is organising"@en .
 
 ### http://readit-project/ontology/hasOutcome
@@ -381,7 +381,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/isFocusedOn
 :focusingOn rdf:type owl:ObjectProperty ;
-  rdfs:domain :Crowdsouring ;
+  rdfs:domain :Crowdsourcing ;
   rdfs:range :Resource ;
   dc:description "A crowdsource campaign is focused on producing a resource"@en ;
   rdfs:label "is focused on"@en .
@@ -430,7 +430,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/producesObservation
 :producesObservation rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:producesObservation ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/producesObservation"^^xsd:anyURI ;
   rdfs:subPropertyOf :notAfter ;
   rdfs:subPropertyOf prov:wasGeneratedBy ;
   rdfs:domain :Prompting ;
@@ -448,7 +448,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/isEngagedIn
 :isEngagedIn rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:isEngagedIn ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/isEngagedIn"^^xsd:anyURI ;
   rdfs:domain :Person ;
   rdfs:range :Engagement ;
   dc:description "TODO"@en ;
@@ -456,7 +456,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/inActivity
 :inActivity rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:inActivity ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/inActivity"^^xsd:anyURI ;
   rdfs:domain :Engagement ;
   rdfs:range :Activity ;
   dc:description "TODO"@en ;
@@ -464,8 +464,8 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/includes
 :includes rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:includes ;
-  rdfs:subProperty prov:used ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/includes"^^xsd:anyURI ;
+  rdfs:subPropertyOf prov:used ;
   rdfs:domain :Engagement ;
   rdfs:range :Activity ;
   dc:description "TODO"@en ;
@@ -473,7 +473,7 @@ SELECT DISTINCT ?person, ?contribution WHERE {
 
 ### http://readit-project/ontology/isReflectionOn
 :isReflectionOn rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:isReflectionOn ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/isReflectionOn"^^xsd:anyURI ;
   rdfs:subPropertyOf oa:hasTarget ;
   rdfs:domain :Observation ;
   rdfs:range :Engagement ;
@@ -617,7 +617,6 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
   rdfs:subClassOf sch:Event ;
   rdfs:subClassOf actr:Activity ;
   rdfs:subClassOf activ:Activity ;
-  rdfs:subClassOf or:Activity ;
   dc:description "Set of tasks aimed to collect resources from users."@en ;
   rdfs:label "Crowdsourcing Activity"@en .
 
@@ -690,7 +689,6 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 ### http://readit-project/ontology/Question
 :Question rdf:type owl:Class ;
   rdfs:subClassOf sch:Question ;
-  rdfs:subClassOf eo:Prompting ;
   rdfs:subClassOf :Task ;
   dc:description "Crowdsourcing task formulated as a question."@en ;
   rdfs:label "Prompting Question"@en .
@@ -698,7 +696,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 ### http://readit-project/ontology/Answer
 :Answer rdf:type owl:Class ;
   rdfs:subClassOf sch:Answer ;
-  rdfs:subClassOf eo:Observation ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Observation"^^xsd:anyURI ;
   rdfs:subClassOf oa:Annotation ;
   dc:description "User answer to a question task."@en ;
   rdfs:label "Crowdsourced Answer"@en .
@@ -718,7 +716,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 
 ### http://readit-project/ontology/Prompting
 :Prompting rdf:Type owl:Class ;
-  rdfs:subClassOf eo:Prompting ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Prompt"^^xsd:anyURI ;
   dc:description "Activity aimed to generate an Observation as outcome."@en ;
   rdfs:label "Observation Prompting"@en .
 
@@ -726,7 +724,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 :Observation rdf:Type owl:Class ;
   rdfs:subClassOf :TemporalEntity ;
   rdfs:subClassOf :Outcome ;
-  rdfs:subClassOf eo:Observation ;
+  rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Observation"^^xsd:anyURI ;
   dc:description "Testimony or evidence of an experience generated by a prompting activity."@en ;
   rdfs:label "Experience Observation"@en .
 
@@ -734,7 +732,7 @@ time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
 :Engagement rdf:Type owl:Class ;
   rdfs:subClassOf :TemporalEntity ;
   rdfs:subClassOf :Event ;
-  rdfs:subClassOf eo:Engagement ;
+   rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Engagement"^^xsd:anyURI ;
   dc:description "Enagement represents the involvement of a Person in an Activity. Engagement is the reification of the relations between Actor, Activity and Observation, as an Observation is a reflection on neither the Person or Activity individually, but it is a reflection on the Engagement (of a Person in an Activity)."@en ;
   rdfs:label "Activity Engagement"@en .
 
