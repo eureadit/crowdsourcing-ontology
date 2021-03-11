@@ -1,746 +1,1052 @@
 @prefix : <http://readit-project/ontology/> .
+@prefix ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#> .
 @prefix cp: <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#> .
 @prefix dc: <http://purl.org/dc/terms/> .
+@prefix eo: <http://modellingdh.github.io/ont/odp/term/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix reo: <http://dataforhistory.org/read-it-ongoing/> .
+@prefix sch: <https://schema.org/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/> .
-@prefix or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl#> .
-@prefix tr: <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl#> .
-@prefix ar: <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl#> .
-@prefix sch: <https://schema.org/> .
 @prefix actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#> .
-@prefix eo: <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml#> .
-@prefix reo: <https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#> .
-@prefix provo: <http://www.w3.org/ns/prov#> .
-@prefix time: <http://www.w3.org/2006/time#> .
-@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@base <http://modellingdh.github.io/ont/odp/crowdsourcing-evidences> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@base <http://modellingdh.github.io/ont/crowdsourcing-evidences> .
 
-
-<http://modellingdh.github.io/ont/crowdsouring-evidences> rdf:type owl:Ontology ;
-  owl:versionIRI <https://raw.githubusercontent.com/modellingDH/crowdsourcing-evidences/master/owl/cp_experience.owl.ttl> ;
-  owl:imports <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> ;
-  dc:creator <https://orcid.org/0000-0002-3639-3622> ,
-            <https://orcid.org/0000-0002-9272-908X> ,
-            <https://orcid.org/0000-0003-3807-5019> ;
-  dc:title "Crowdsouring Evidences"@en ;
-  cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
-                        "Which organization is organising a crowdsource campaign?"@en ,
-                        "Who is managing what aspect of the campaign?"@en ,
-                        "Who is contributing to crowdsourcing campaing and producing what outcome?"@en ;
-  cp:extractedFrom <https://doi.org/10.1016/j.promfg.2015.07.286> ,
-                  <https://dl.acm.org/doi/10.5555/2878937.2878946> ;
-  cp:relatedCPs <https://raw.githubusercontent.com/modellingDH/odp_experience/master/owl/cp_experience.owl.rdfxml> ,
-                <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl> ,
-                <http://www.ontologydesignpatterns.org/cp/owl/agentrole.owl> ;
-  cp:hasIntent "to represent the crowdsouring of evidences from the general public for supporting research activities."@en ;
-  cp:hasUnitTest """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+<http://modellingdh.github.io/ont/crowdsourcing-evidences> rdf:type owl:Ontology ;
+                                                            owl:versionIRI <https://raw.githubusercontent.com/modellingDH/crowdsourcing-evidences/master/owl/cp_experience.owl.ttl> ;
+                                                            owl:imports <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> ;
+                                                            dc:title "Crowdsourcing Evidences"@en ;
+                                                            cp:coversRequirements "What outcomes crowdsource campaigns produced?"@en ,
+                                                                                  "Which organization is organising a crowdsource campaign?"@en ,
+                                                                                  "Who is contributing to crowdsourcing campaing and producing what outcome?"@en ,
+                                                                                  "Who is managing what aspect of the campaign?"@en ;
+                                                            cp:extractedFrom <https://dl.acm.org/doi/10.5555/2878937.2878946> ,
+                                                                             <https://doi.org/10.1016/j.promfg.2015.07.286> ;
+                                                            cp:hasIntent "to represent the crowdsourcing of evidences from the general public for supporting research activities."@en ;
+                                                            cp:hasUnitTest """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
 PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
 PREFIX actr: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl>
 SELECT DISTINCT ?outcome WHERE {
   ?task a :Task ;
     ?task activ:produces ?outcome .
   ?outcome a actr:Outcome .
-  ?crowdsourcing a :Crowdsouring ;
+  ?crowdsourcing a :Crowdsourcing ;
     ?crowdsourcing activ:hasSubactivity ?task .
   }"""@en ,
-"""PREFIX : <http://modellingdh.github.io/ont/odp/term/>
-SELECT DISTINCT ?organization WHERE {
-   ?organization a :Organization
-      ; ?organization :organising ?crowdsouring
-   . ?crowdsouring a :Crowdsourcing
+                                                                           """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
+PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+SELECT DISTINCT ?person, ?contribution WHERE {
+  ?person a :Person ;
+   ?person dul:hasRole ?contributor ;
+    ?contributor a :Contributor .
+  ?contributor dul:hasTask ?task ;
+    ?task a dul:Task .
+  ?crowdsourcing a :Crowdsourcing ;
+    ?crowdsourcing activ:hasSubactivity ?task .
+  ?task actr:produces ?contribution ;
+    ?contribution a :Resource .
 }"""@en ,
-"""PREFIX : <http://modellingdh.github.io/ont/odp/term/>
-PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
-PREFIX tr: <http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
+                                                                           """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+PREFIX dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
 PREFIX activ: <http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl>
 SELECT DISTINCT ?agent WHERE {
    ?agent a activ:Agent ;
-    ?agent or:hasRole ?manager ;
+    ?agent dul:hasRole ?manager ;
     ?manager a :Management .
-  ?manager tr:isTaskOf ?crowdsourcing ;
-    ?crowdsourcing a :Crowdsouring .
+  ?manager dul:isTaskOf ?crowdsourcing ;
+    ?crowdsourcing a :Crowdsourcing .
 }"""@en ,
-"""PREFIX : <http://modellingdh.github.io/ont/odp/term/>
-PREFIX activ: <http://ontology.eil.utoronto.ca/icity/ActivitySpecification/>
-PREFIX or: <http://www.ontologydesignpatterns.org/cp/owl/objectrole.owl>
-PREFIX tr:<http://www.ontologydesignpatterns.org/cp/owl/taskrole.owl>
-SELECT DISTINCT ?person, ?contribution WHERE {
-  ?person a :Person ;
-   ?person or:hasRole ?contributor ;
-    ?contributor a :Contributor .
-  ?contributor tr:hasTask ?task ;
-    ?task a tr:Task .
-  ?crowdsourcing a :Crowdsouring ;
-    ?crowdsouring activ:hasSubactivity ?task .
-  ?task actr:produces ?contribution ;
-    ?contribution a :Resource .
+                                                                           """PREFIX : <http://modellingdh.github.io/ont/odp/term/>
+SELECT DISTINCT ?organization WHERE {
+   ?organization a :Organization
+      ; ?organization :organising ?crowdsourcing
+   . ?crowdsourcing a :Crowdsourcing
 }"""@en .
 
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+dc:description rdf:type owl:AnnotationProperty .
 
 
+###  http://purl.org/dc/terms/title
+dc:title rdf:type owl:AnnotationProperty .
 
 
 #################################################################
-#    Data properties
+#    Datatypes
 #################################################################
 
-### http://readit-project/ontology/responsibility
-:responsibility rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Management ;
-  rdfs:range [ rdf:type rdfs:Datatype ;
-            owl:oneOf [ rdf:type rdf:List ;
-                        rdf:first "risk" ;
-                        rdf:rest [ rdf:type rdf:List ;
-                                   rdf:first "quality" ;
-                                   rdf:rest [ rdf:type rdf:List ;
-                                              rdf:first "time horizon" ;
-                                              rdf:rest rdf:nil
-                                            ]
-                                 ]
-                      ]
-            ] ;
-  dc:description "Responsibility of the management role"@en ;
-  rdfs:label "management responsibility"@en .
-
-### http://readit-project/ontology/platform
-:platform rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Activity ;
-  rdfs:range xsd:anyURI ;
-  dc:description "URI of the used crowdsouring platform used"@en ;
-  rdfs:label "crowdsouring platform"@en .
-
-### http://readit-project/ontology/openess
-:target rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Crowdsourcing ;
-  rdfs:range [ rdf:type rdfs:Datatype ;
-             owl:oneOf [ rdf:type rdf:List ;
-                         rdf:first "internal" ;
-                         rdf:rest [ rdf:type rdf:List ;
-                                    rdf:first "external" ;
-                                    rdf:rest rdf:nil
-                                  ]
-                       ]
-           ] ;
-  dc:description "The target of the crowdsourcing campaign: internal to the organization or external, such as customers, stakeholders or the general public"@en ;
-  rdfs:label "target audience"@en .
-
-### http://readit-project/ontology/typeOfCompensation
-:typeOfCompensation rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Resource ;
-  rdfs:range [ rdf:type rdfs:Datatype ;
-             owl:oneOf [ rdf:type rdf:List ;
-                         rdf:first "tangible" ;
-                         rdf:rest [ rdf:type rdf:List ;
-                                    rdf:first "intangible" ;
-                                    rdf:rest rdf:nil
-                                  ]
-                       ]
-           ] ;
-  dc:description "The type of the resource collected of given as compensation: tangible or intangible"@en ;
-  rdfs:label "type of compensation"@en .
-
-### http://readit-project/ontology/typeOfOutcome
-:typeOfOutcome rdf:type owl:DatatypeProperty ;
- rdfs:domain :Resource ;
- rdfs:range [ rdf:type rdfs:Datatype ;
-            owl:oneOf [ rdf:type rdf:List ;
-                          rdf:first "knowledge" ;
-                          rdf:rest [ rdf:type rdf:List ;
-                                     rdf:first "supply" ;
-                                     rdf:rest [ rdf:type rdf:List ;
-                                                rdf:first "funding" ;
-                                                rdf:rest [ rdf:type rdf:List ;
-                                                           rdf:first "time" ;
-                                                           rdf:rest rdf:nil
-                                                         ]
-                                              ]
-                                   ]
-                        ]
-            ] ;
- dc:description "Crowdsourcing requires or produces: knowledge, resource, funding or time"@en ;
- rdfs:label "type of outcome"@en .
-
-### http://readit-project/ontology/maturity
-:effect rdf:type owl:DatatypeProperty ;
-  rdfs:domain owl:Thing ;
-  rdfs:range [ rdf:type rdfs:Datatype ;
-             owl:oneOf [ rdf:type rdf:List ;
-                         rdf:first "incremental" ;
-                         rdf:rest [ rdf:type rdf:List ;
-                                    rdf:first "generative" ;
-                                    rdf:rest [ rdf:type rdf:List ;
-                                               rdf:first "innovative" ;
-                                               rdf:rest [ rdf:type rdf:List ;
-                                                          rdf:first "disruptive" ;
-                                                          rdf:rest rdf:nil
-                                                        ]
-                                             ]
-                                  ]
-                       ]
-           ] ;
-  dc:description "Crowdsourcing can have different effects on the organization: (incremental) if it can use crowdsourcing to generate incremental improvements, (generative) when it can use crowdsourcing to generate ideas to incrementally improve specific tactics and strategies, (innovative) if it can use crowdsourcing to effect innovative change in areas that are crucial or exemplary (disruptive) if it can use crowdsourcing to uncover industry-transforming paradigm shifts"@en ;
-  rdfs:label "maturity level of crowdsouring campaign"@en .
-
-### http://readit-project/ontology/date
-:date rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf dc:created ;
-  rdfs:domain :Outcome ;
-  rdfs:range xsd:date ;
-  dc:description "TODO"@en ;
-  rdfs:label "date of creation"@en .
-
-### http://readit-project/ontology/modified
-:modified rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf dc:modified ;
-  rdfs:domain :Outcome ;
-  rdfs:range xsd:date ;
-  dc:description "TODO"@en ;
-  rdfs:label "date modified"@en .
-
-### http://readit-project/ontology/answerText
-:answerText rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf :hasBody ;
-  rdfs:subPropertyOf sch:text ;
-  rdfs:domain :Answer ;
-  rdfs:range xsd:string ;
-  dc:description "TODO"@en ;
-  rdfs:label "text"@en .
-
-### http://readit-project/ontology/text
-:text rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:text ;
-  rdfs:domain :Task ;
-  rdfs:range xsd:string ;
-  dc:description "TODO"@en ;
-  rdfs:label "text"@en .
-
-### http://readit-project/ontology/abstract
-:abstract rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:abstract ;
-  rdfs:domain :Outcome ;
-  rdfs:range xsd:string ;
-  dc:description "TODO"@en ;
-  rdfs:label "abstract"@en .
-
-### http://readit-project/ontology/title
-:title rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:title ;
-  rdfs:domain :Resource ;
-  rdfs:range xsd:string ;
-  dc:description "TODO"@en ;
-  rdfs:label "title"@en .
-
-### http://readit-project/ontology/inLanguage
-:inLanguage rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:inLanguage ;
-  rdfs:domain :Question ;
-  rdfs:domain :Answer ;
-  rdfs:range xsd:language ;
-  dc:description "TODO"@en ;
-  rdfs:label "in language"@en .
-
-
-### http://readit-project/ontology/distance
-:distance rdf:type owl:DatatypeProperty ;
-  rdfs:domain :Observation ;
-  rdfs:range [ rdf:type rdfs:Datatype ;
-             owl:oneOf [ rdf:type rdf:List ;
-                         rdf:first "close" ;
-                         rdf:rest [ rdf:type rdf:List ;
-                                    rdf:first "distant" ;
-                                    rdf:rest rdf:nil
-                                  ]
-                       ]
-           ] ;
-  dc:description "TODO"@en ;
-  rdfs:label "temporal distance"@en .
-
-### http://readit-project/ontology/url
-:url rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:url ;
-  rdfs:domain :Resource ;
-  rdfs:range xsd:anyURI ;
-  dc:description "TODO"@en ;
-  rdfs:label "url"@en .
-
-### http://readit-project/ontology/identifier
-:identifier rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:identifier ;
-  rdfs:domain :Resource ;
-  rdfs:range xsd:anyURI ;
-  dc:description "TODO"@en ;
-  rdfs:label "identifier"@en .
-
-### http://readit-project/ontology/identifier
-:format rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:encodingFormat ;
-  rdfs:domain :MediaResource ;
-  rdfs:range xsd:string ;
-  dc:description "TODO"@en ;
-  rdfs:label "encoding format"@en .
-
-### http://readit-project/ontology/thumbnail
-:thumbnail rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf sch:thumbnailURL ;
-  rdfs:domain :MediaResource ;
-  rdfs:range xsd:anyURI ;
-  dc:description "TODO"@en ;
-  rdfs:label "thumbnail url"@en .
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
 
 
 #################################################################
 #    Object Properties
 #################################################################
 
+###  http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#produces
+actr:produces rdf:type owl:ObjectProperty .
 
-### http://readit-project/ontology/aboutConcept
+
+###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/hasSubactivity
+activ:hasSubactivity rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/dc/terms/creator
+dc:creator rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/dc/terms/subject
+dc:subject rdf:type owl:ObjectProperty .
+
+
+###  http://readit-project/ontology/aboutConcept
 :aboutConcept rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf dc:subject ;
-  rdfs:subPropertyOf sch:about ;
-  rdfs:domain :Task ;
-  rdfs:domain :Resource ;
-  rdfs:range :Concept ;
-  dc:description "TODO"@en ;
-  rdfs:label "about concept"@en .
+              rdfs:subPropertyOf dc:subject ,
+                                 sch:about ;
+              rdfs:domain :Resource ,
+                          :Task ;
+              rdfs:range :Concept ;
+              dc:description "TODO"@en ;
+              rdfs:label "about concept"@en .
 
 
-### http://readit-project/ontology/hasBody
-:hasBody rdf:type owl:ObjectProperty ;
-  rdfs:domain :Task ;
-  rdfs:domain :Resource ;
-  rdfs:range owl:Thing ;
-  dc:description "TODO"@en ;
-  rdfs:label "has body"@en .
-
-### http://readit-project/ontology/hasRole
-:hasRole rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf or:hasRole ;
-  rdfs:domain :Agent ;
-  rdfs:range :Role ;
-  dc:description "TODO"@en ;
-  rdfs:label "has role"@en .
-
-### http://readit-project/ontology/isTaskOf
-:isTaskOf rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf tr:isTaskOf ;
-  rdfs:subPropertyOf :notBefore ;
-  owl:inverseOf :hasTask ;
-  rdfs:domain :Activity ;
-  rdfs:range :Role ;
-  dc:description "TODO"@en ;
-  rdfs:label "is task of"@en .
-
-### http://readit-project/ontology/hasTask
-:hasTask rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf tr:hasTask ;
-  rdfs:subPropertyOf :notAfter ;
-  owl:inverseOf :isTaskOf ;
-  rdfs:domain :Role ;
-  rdfs:range :Activity ;
-  dc:description "TODO"@en ;
-  rdfs:label "has task of"@en .
-
-### http://readit-project/ontology/organising
-:organising rdf:type owl:ObjectProperty ;
-  rdfs:domain :Organization ;
-  rdfs:range :Crowdsourcing ;
-  dc:description "Organization is organising an crowdsouring campaign"@en ;
-  rdfs:label "is organising"@en .
-
-### http://readit-project/ontology/hasOutcome
-:hasOutcome rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf actr:produces ;
-  rdfs:subPropertyOf :notAfter ;
-  owl:inverseOf :outcomeOf ;
-  rdfs:domain :Activity ;
-  rdfs:range :Outcome ;
-  dc:description "TODO"@en ;
-  rdfs:label "outcome"@en .
-
-### http://readit-project/ontology/outcomeOf
-:outcomeOf rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore ;
-  owl:inverseOf :hasOutcome ;
-  rdfs:domain :Outcome ;
-  rdfs:range :Activity ;
-  dc:description "TODO"@en ;
-  rdfs:label "outcome of"@en .
-
-### http://readit-project/ontology/givesCompensation
-:givesCompensation rdf:type owl:ObjectProperty ;
-  rdfs:domain :Activity ;
-  rdfs:range :Person ;
-  dc:description "A crowdsource campaign gives a resource as a compensation to partipants"@en ;
-  rdfs:label "gives compensation"@en .
-
-### http://readit-project/ontology/isFocusedOn
-:focusingOn rdf:type owl:ObjectProperty ;
-  rdfs:domain :Crowdsouring ;
-  rdfs:range :Resource ;
-  dc:description "A crowdsource campaign is focused on producing a resource"@en ;
-  rdfs:label "is focused on"@en .
-
-###  /hasSubactivity
-:hasSubactivity rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf activ:hasSubactivity ;
-  rdfs:domain :Activity ;
-  rdfs:range :Activity ;
-  dc:description "TODO"@en ;
-  rdfs:label "includes activity"@en .
-
-### http://readit-project/ontology/employee
-:employee rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf sch:employee ;
-  rdfs:domain :Organization ;
-  rdfs:range :Person ;
-  dc:description "TODO"@en ;
-  rdfs:label "employee of"@en .
-
-### http://readit-project/ontology/performing
-:performing rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf sch:agent ;
-  rdfs:domain :Agent ;
-  rdfs:range :Activity ;
-  dc:description "TODO"@en ;
-  rdfs:label "performing"@en .
-
-### http://readit-project/ontology/answer
+###  http://readit-project/ontology/answer
 :answer rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf sch:suggestedAnswer ;
-  rdfs:domain :Question ;
-  rdfs:range :Answer ;
-  dc:description "TODO"@en ;
-  rdfs:label "sourced answer"@en .
+        rdfs:subPropertyOf sch:suggestedAnswer ;
+        owl:inverseOf :isAnswerOf ;
+        rdfs:domain :Question ;
+        rdfs:range :Answer ;
+        dc:description "TODO"@en ;
+        rdfs:label "sourced answer"@en .
 
-### http://readit-project/ontology/isAnswerOf
-:isAnswerOf rdf:type owl:ObjectProperty ;
-  owl:inverseOf :answer ;
-  rdfs:subPropertyOf oa:hasTarget ;
-  rdfs:subPropertyOf sch:suggestedAnswer ;
-  rdfs:domain :Answer ;
-  rdfs:range :Question ;
-  dc:description "TODO"@en ;
-  rdfs:label "sourced answer"@en .
 
-### http://readit-project/ontology/producesObservation
-:producesObservation rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:producesObservation ;
-  rdfs:subPropertyOf :notAfter ;
-  rdfs:subPropertyOf prov:wasGeneratedBy ;
-  rdfs:domain :Prompting ;
-  rdfs:range :Observation ;
-  dc:description "TODO"@en ;
-  rdfs:label "produces observation"@en .
-
-### http://readit-project/ontology/oberservationProducedBy
-:oberservationProducedBy rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore ;
-  rdfs:subPropertyOf oa:motivatedBy ;
-  owl:inverseOf :producesObservation ;
-  dc:description "TODO"@en ;
-  rdfs:label "observation produced by"@en .
-
-### http://readit-project/ontology/isEngagedIn
-:isEngagedIn rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:isEngagedIn ;
-  rdfs:domain :Person ;
-  rdfs:range :Engagement ;
-  dc:description "TODO"@en ;
-  rdfs:label "is engaged in"@en .
-
-### http://readit-project/ontology/inActivity
-:inActivity rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:inActivity ;
-  rdfs:domain :Engagement ;
-  rdfs:range :Activity ;
-  dc:description "TODO"@en ;
-  rdfs:label "in activity"@en .
-
-### http://readit-project/ontology/includes
-:includes rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:includes ;
-  rdfs:subProperty prov:used ;
-  rdfs:domain :Engagement ;
-  rdfs:range :Activity ;
-  dc:description "TODO"@en ;
-  rdfs:label "includes observation"@en .
-
-### http://readit-project/ontology/isReflectionOn
-:isReflectionOn rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf eo:isReflectionOn ;
-  rdfs:subPropertyOf oa:hasTarget ;
-  rdfs:domain :Observation ;
-  rdfs:range :Engagement ;
-  dc:description "TODO"@en ;
-  rdfs:label "is relflection on"@en .
-
-### http://readit-project/ontology/creator
+###  http://readit-project/ontology/creator
 :creator rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf dc:creator ;
-  rdfs:subPropertyOf sch:creator ;
-  rdfs:domain :Resource ;
-  rdfs:domain :Activity ;
-  rdfs:rage :Agent ;
-  dc:description "TODO"@en ;
-  rdfs:labe "creator"@en .
+         rdfs:subPropertyOf dc:creator ,
+                            sch:creator ;
+         rdfs:domain :Activity ,
+                     :Resource ;
+         dc:description "TODO"@en ;
+         rdfs:label "creator"@en .
 
 
-### http://readit-project/ontology/notBefore
-:notBefore rdf:Type owl:ObjectProperty ;
-  rdfs:domain :TemporalEntity ;
-  rdfs:range :TemporalEntity ;
-  owl:propertyChainAxiom ( :isReflectionOn :inActivity ) ;
-  dc:description "TODO"@en ;
-  rdfs:label "not before"@en .
+###  http://readit-project/ontology/employee
+:employee rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf sch:employee ;
+          rdfs:domain :Organization ;
+          rdfs:range :Person ;
+          dc:description "TODO"@en ;
+          rdfs:label "employee of"@en .
 
-### http://readit-project/ontology/notAfter
-:notAfter rdf:Type owl:ObjectProperty ;
-  owl:inverseOf :notBefore ;
-  dc:description "TODO"@en ;
-  rdfs:label "not after"@en .
 
-### http://www.w3.org/2006/time#before
-time:before rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notAfter .
+###  http://readit-project/ontology/focusingOn
+:focusingOn rdf:type owl:ObjectProperty ;
+            rdfs:domain :Crowdsourcing ;
+            rdfs:range :Resource ;
+            dc:description "A crowdsource campaign is focused on producing a resource"@en ;
+            rdfs:label "is focused on"@en .
 
-### http://www.w3.org/2006/time#after
-time:after rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore .
 
-### http://www.w3.org/2006/time#intervalMeets
-time:intervalMeets rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore .
+###  http://readit-project/ontology/followedByTask
+:followedByTask rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :taskIsRelatedTo ;
+                dc:description "TODO"@en ;
+                rdfs:label "followed by task" .
 
-### http://www.w3.org/2006/time#intervalMetBy
-time:intervalMetBy rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notAfter .
 
-### http://www.w3.org/2006/time#intervalEquals
-time:intervalEquals rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore .
+###  http://readit-project/ontology/followsTask
+:followsTask rdf:type owl:ObjectProperty ;
+             owl:inverseOf :taskIsFollowedUpBy ;
+             dc:description "TODO"@en ;
+             rdfs:label "follows task" .
 
-### http://www.w3.org/2006/time#intervalDuring
-time:intervalDuring rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore ;
-  rdfs:subPropertyOf :notAfter .
 
-### http://www.w3.org/2006/time#intervalContains
-time:intervalContains rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore ;
-  rdfs:subPropertyOf :notAfter .
+###  http://readit-project/ontology/givesCompensation
+:givesCompensation rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Activity ;
+                   rdfs:range :Person ;
+                   dc:description "A crowdsource campaign gives a resource as a compensation to partipants"@en ;
+                   rdfs:label "gives compensation"@en .
 
-### http://www.w3.org/2006/time#intervalFinishes
-time:intervalFinishes rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notAfter .
 
-### http://www.w3.org/2006/time#intervalFinishedBy
-time:intervalFinishedBy rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :notBefore .
+###  http://readit-project/ontology/hasBody
+:hasBody rdf:type owl:ObjectProperty ;
+         rdfs:domain :Resource ,
+                     :Task ;
+         rdfs:range owl:Thing ;
+         dc:description "TODO"@en ;
+         rdfs:label "has body"@en .
 
-### http://readit-project/ontology/isRelatedToTask
-:isRelatedToTask rdf:Type owl:ObjectProperty ,
-  owl:TransitiveProperty ;
-  rdfs:domain :Task ;
-  rdfs:range :Task ;
-  dc:description "TODO"@en ;
-  rdfs:label "is related to tasks" .
 
-### http://readit-project/ontology/isTranslationOfTask
-:isTranslationOfTask rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :taskIsRelatedTo ;
-  dc:description "TODO"@en ;
-  rdfs:label "is translation of task" .
+###  http://readit-project/ontology/hasOutcome
+:hasOutcome rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf actr:produces ,
+                               :notAfter ;
+            owl:inverseOf :outcomeOf ;
+            rdfs:domain :Activity ;
+            rdfs:range :Outcome ;
+            dc:description "TODO"@en ;
+            rdfs:label "outcome"@en .
 
-### http://readit-project/ontology/translatedByTask
-:translatedByTask rdf:Type owl:ObjectProperty ;
-  owl:inverseOf :translatingTask ;
-  dc:description "TODO"@en ;
-  rdfs:label "is translated by task" .
 
-### http://readit-project/ontology/followedByTask
-:followedByTask rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf :taskIsRelatedTo ;
-  dc:description "TODO"@en ;
-  rdfs:label "followed by task" .
+###  http://readit-project/ontology/hasRole
+:hasRole rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf dul:hasRole ;
+         rdfs:domain :Agent ;
+         rdfs:range :Role ;
+         dc:description "TODO"@en ;
+         rdfs:label "has role"@en .
 
-### http://readit-project/ontology/followsTask
-:followsTask rdf:Type owl:ObjectProperty ;
-  owl:inverseOf :taskIsFollowedUpBy ;
-  dc:description "TODO"@en ;
-  rdfs:label "follows task" .
 
-### http://readit-project/ontology/wasAssociatedWith
-:wasAssociatedWith rdf:Type owl:ObjectProperty ;
-  rdfs:subPropertyOf prov:wasAssociatedWith ;
-  rdfs:domain :Person ;
-  rdfs:range :Activity ;
-  owl:propertyChainAxiom ( :isEngagedIn :inActivity ) ;
-  dc:description "TODO"@en ;
-  rdfs:label "was associated with" .
+###  http://readit-project/ontology/hasSubactivity
+:hasSubactivity rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf activ:hasSubactivity ;
+                rdfs:domain :Activity ;
+                rdfs:range :Activity ;
+                dc:description "TODO"@en ;
+                rdfs:label "includes activity"@en .
 
-  ### http://readit-project/ontology/wasAttributedTo
-  :wasAttributedTo rdf:Type owl:ObjectProperty ;
-    rdfs:subPropertyOf prov:wasAttributedTo ;
-    rdfs:domain :Person ;
-    rdfs:range :Resource ;
-    owl:propertyChainAxiom ( :isReflectionOn :inActivity :wasAssociatedWith ) ;
-    dc:description "TODO"@en ;
-    rdfs:label "was attributed to" .
+
+###  http://readit-project/ontology/hasTask
+:hasTask rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :notAfter ,
+                            dul:hasTask ;
+         owl:inverseOf :isTaskOf ;
+         rdfs:domain :Role ;
+         rdfs:range :Activity ;
+         dc:description "TODO"@en ;
+         rdfs:label "has task of"@en .
+
+
+###  http://readit-project/ontology/inActivity
+:inActivity rdf:type owl:ObjectProperty ;
+            rdfs:domain :Engagement ;
+            rdfs:range :Activity ;
+            dc:description "TODO"@en ;
+            rdfs:label "in activity"@en ;
+            rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/inActivity"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/includes
+:includes rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf provo:used ;
+          rdfs:domain :Engagement ;
+          rdfs:range :Observation ;
+          dc:description "TODO"@en ;
+          rdfs:label "includes observation"@en ;
+          rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/includes"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/isAnswerOf
+:isAnswerOf rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf oa:hasTarget ,
+                               sch:suggestedAnswer ;
+            rdfs:domain :Answer ;
+            rdfs:range :Question ;
+            dc:description "TODO"@en ;
+            rdfs:label "sourced answer"@en .
+
+
+###  http://readit-project/ontology/isEngagedIn
+:isEngagedIn rdf:type owl:ObjectProperty ;
+             rdfs:domain :Person ;
+             rdfs:range :Engagement ;
+             dc:description "TODO"@en ;
+             rdfs:label "is engaged in"@en ;
+             rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/isEngagedIn"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/isReflectionOn
+:isReflectionOn rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf oa:hasTarget ;
+                rdfs:domain :Observation ;
+                rdfs:range :Engagement ;
+                dc:description "TODO"@en ;
+                rdfs:label "is relflection on"@en ;
+                rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/isReflectionOn"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/isRelatedToTask
+:isRelatedToTask rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Task ;
+                 rdfs:range :Task ;
+                 dc:description "TODO"@en ;
+                 rdfs:label "is related to tasks" .
+
+
+###  http://readit-project/ontology/isTaskOf
+:isTaskOf rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :notBefore ,
+                             dul:isTaskOf ;
+          rdfs:domain :Activity ;
+          rdfs:range :Role ;
+          dc:description "TODO"@en ;
+          rdfs:label "is task of"@en .
+
+
+###  http://readit-project/ontology/isTranslationOfTask
+:isTranslationOfTask rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :taskIsRelatedTo ;
+                     dc:description "TODO"@en ;
+                     rdfs:label "is translation of task" .
+
+
+###  http://readit-project/ontology/notAfter
+:notAfter rdf:type owl:ObjectProperty ;
+          owl:inverseOf :notBefore ;
+          rdf:type owl:ReflexiveProperty ;
+          dc:description "TODO"@en ;
+          rdfs:label "not after"@en .
+
+
+###  http://readit-project/ontology/notBefore
+:notBefore rdf:type owl:ObjectProperty ,
+                    owl:ReflexiveProperty ;
+           rdfs:domain :TemporalEntity ;
+           rdfs:range :TemporalEntity ;
+           owl:propertyChainAxiom ( :isReflectionOn
+                                    :inActivity
+                                  ) ;
+           dc:description "TODO"@en ;
+           rdfs:label "not before"@en .
+
+
+###  http://readit-project/ontology/oberservationProducedBy
+:oberservationProducedBy rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :notBefore ,
+                                            oa:motivatedBy ;
+                         owl:inverseOf :producesObservation ;
+                         dc:description "TODO"@en ;
+                         rdfs:label "observation produced by"@en .
+
+
+###  http://readit-project/ontology/organising
+:organising rdf:type owl:ObjectProperty ;
+            rdfs:domain :Organization ;
+            rdfs:range :Crowdsourcing ;
+            dc:description "Organization is organising an crowdsourcing campaign"@en ;
+            rdfs:label "is organising"@en .
+
+
+###  http://readit-project/ontology/outcomeOf
+:outcomeOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :notBefore ;
+           rdfs:domain :Outcome ;
+           rdfs:range :Activity ;
+           dc:description "TODO"@en ;
+           rdfs:label "outcome of"@en .
+
+
+###  http://readit-project/ontology/performing
+:performing rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf sch:agent ;
+            rdfs:domain :Agent ;
+            rdfs:range :Activity ;
+            dc:description "TODO"@en ;
+            rdfs:label "performing"@en .
+
+
+###  http://readit-project/ontology/producesObservation
+:producesObservation rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :notAfter ,
+                                        provo:wasGeneratedBy ;
+                     rdfs:domain :Prompting ;
+                     rdfs:range :Observation ;
+                     dc:description "TODO"@en ;
+                     rdfs:label "produces observation"@en ;
+                     rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/producesObservation"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/taskIsFollowedUpBy
+:taskIsFollowedUpBy rdf:type owl:ObjectProperty .
+
+
+###  http://readit-project/ontology/taskIsRelatedTo
+:taskIsRelatedTo rdf:type owl:ObjectProperty ;
+                 rdfs:label "task is related to"@en .
+
+
+###  http://readit-project/ontology/translatedByTask
+:translatedByTask rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :translatingTask ;
+                  dc:description "TODO"@en ;
+                  rdfs:label "is translated by task" .
+
+
+###  http://readit-project/ontology/translatingTask
+:translatingTask rdf:type owl:ObjectProperty .
+
+
+###  http://readit-project/ontology/wasAssociatedWith
+:wasAssociatedWith rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf provo:wasAssociatedWith ;
+                   rdfs:domain :Person ;
+                   rdfs:range :Activity ;
+                   owl:propertyChainAxiom ( :isEngagedIn
+                                            :inActivity
+                                          ) ;
+                   dc:description "TODO"@en ;
+                   rdfs:label "was associated with" .
+
+
+###  http://readit-project/ontology/wasAttributedTo
+:wasAttributedTo rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf provo:wasAttributedTo ;
+                 rdfs:domain :Person ;
+                 rdfs:range :Resource ;
+                 owl:propertyChainAxiom ( :isReflectionOn
+                                          :inActivity
+                                          :wasAssociatedWith
+                                        ) ;
+                 dc:description "TODO"@en ;
+                 rdfs:label "was attributed to" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRole
+dul:hasRole rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask
+dul:hasTask rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf
+dul:isTaskOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/2006/time#after
+time:after rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :notBefore .
+
+
+###  http://www.w3.org/2006/time#before
+time:before rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :notAfter .
+
+
+###  http://www.w3.org/2006/time#intervalContains
+time:intervalContains rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :notAfter ,
+                                         :notBefore .
+
+
+###  http://www.w3.org/2006/time#intervalDuring
+time:intervalDuring rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :notAfter ,
+                                       :notBefore .
+
+
+###  http://www.w3.org/2006/time#intervalEquals
+time:intervalEquals rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :notBefore .
+
+
+###  http://www.w3.org/2006/time#intervalFinishedBy
+time:intervalFinishedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :notBefore .
+
+
+###  http://www.w3.org/2006/time#intervalFinishes
+time:intervalFinishes rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :notAfter .
+
+
+###  http://www.w3.org/2006/time#intervalMeets
+time:intervalMeets rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :notBefore .
+
+
+###  http://www.w3.org/2006/time#intervalMetBy
+time:intervalMetBy rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :notAfter .
+
+
+###  http://www.w3.org/ns/oa#hasTarget
+oa:hasTarget rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/oa#motivatedBy
+oa:motivatedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/prov#used
+provo:used rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/prov#wasAssociatedWith
+provo:wasAssociatedWith rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/prov#wasAttributedTo
+provo:wasAttributedTo rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+provo:wasGeneratedBy rdf:type owl:ObjectProperty .
+
+
+###  https://schema.org/about
+sch:about rdf:type owl:ObjectProperty .
+
+
+###  https://schema.org/agent
+sch:agent rdf:type owl:ObjectProperty .
+
+
+###  https://schema.org/creator
+sch:creator rdf:type owl:ObjectProperty .
+
+
+###  https://schema.org/employee
+sch:employee rdf:type owl:ObjectProperty .
+
+
+###  https://schema.org/suggestedAnswer
+sch:suggestedAnswer rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/dc/terms/created
+dc:created rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/dc/terms/modified
+dc:modified rdf:type owl:DatatypeProperty .
+
+
+###  http://readit-project/ontology/abstract
+:abstract rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf sch:abstract ;
+          rdfs:domain :Outcome ;
+          rdfs:range xsd:string ;
+          dc:description "TODO"@en ;
+          rdfs:label "abstract"@en .
+
+
+###  http://readit-project/ontology/answerText
+:answerText rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Answer ;
+            rdfs:range xsd:string ;
+            dc:description "TODO"@en ;
+            rdfs:label "answer text" .
+
+
+###  http://readit-project/ontology/date
+:date rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf dc:created ;
+      rdfs:domain :Outcome ;
+      rdfs:range xsd:date ;
+      dc:description "TODO"@en ;
+      rdfs:label "date of creation"@en .
+
+
+###  http://readit-project/ontology/distance
+:distance rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Observation ;
+          rdfs:range [ rdf:type rdfs:Datatype ;
+                       owl:oneOf [ rdf:type rdf:List ;
+                                   rdf:first "close" ;
+                                   rdf:rest [ rdf:type rdf:List ;
+                                              rdf:first "distant" ;
+                                              rdf:rest rdf:nil
+                                            ]
+                                 ]
+                     ] ;
+          dc:description "TODO"@en ;
+          rdfs:label "temporal distance"@en .
+
+
+###  http://readit-project/ontology/effect
+:effect rdf:type owl:DatatypeProperty ;
+        rdfs:domain owl:Thing ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                     owl:oneOf [ rdf:type rdf:List ;
+                                 rdf:first "disruptive" ;
+                                 rdf:rest [ rdf:type rdf:List ;
+                                            rdf:first "generative" ;
+                                            rdf:rest [ rdf:type rdf:List ;
+                                                       rdf:first "incremental" ;
+                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                  rdf:first "innovative" ;
+                                                                  rdf:rest rdf:nil
+                                                                ]
+                                                     ]
+                                          ]
+                               ]
+                   ] ;
+        dc:description "Crowdsourcing can have different effects on the organization: (incremental) if it can use crowdsourcing to generate incremental improvements, (generative) when it can use crowdsourcing to generate ideas to incrementally improve specific tactics and strategies, (innovative) if it can use crowdsourcing to effect innovative change in areas that are crucial or exemplary (disruptive) if it can use crowdsourcing to uncover industry-transforming paradigm shifts"@en ;
+        rdfs:label "maturity level of crowdsourcing campaign"@en .
+
+
+###  http://readit-project/ontology/format
+:format rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf sch:encodingFormat ;
+        rdfs:domain :MediaResource ;
+        rdfs:range xsd:string ;
+        dc:description "TODO"@en ;
+        rdfs:label "encoding format"@en .
+
+
+###  http://readit-project/ontology/identifier
+:identifier rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf sch:identifier ;
+            rdfs:domain :Resource ;
+            rdfs:range xsd:anyURI ;
+            dc:description "TODO"@en ;
+            rdfs:label "identifier"@en .
+
+
+###  http://readit-project/ontology/inLanguage
+:inLanguage rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf sch:inLanguage ;
+            rdfs:domain :Answer ,
+                        :Question ;
+            rdfs:range xsd:language ;
+            dc:description "TODO"@en ;
+            rdfs:label "in language"@en .
+
+
+###  http://readit-project/ontology/modified
+:modified rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf dc:modified ;
+          rdfs:domain :Outcome ;
+          rdfs:range xsd:date ;
+          dc:description "TODO"@en ;
+          rdfs:label "date modified"@en .
+
+
+###  http://readit-project/ontology/platform
+:platform rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Activity ;
+          rdfs:range xsd:anyURI ;
+          dc:description "URI of the used crowdsourcing platform used"@en ;
+          rdfs:label "crowdsourcing platform"@en .
+
+
+###  http://readit-project/ontology/responsibility
+:responsibility rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Management ;
+                rdfs:range [ rdf:type rdfs:Datatype ;
+                             owl:oneOf [ rdf:type rdf:List ;
+                                         rdf:first "quality" ;
+                                         rdf:rest [ rdf:type rdf:List ;
+                                                    rdf:first "risk" ;
+                                                    rdf:rest [ rdf:type rdf:List ;
+                                                               rdf:first "time horizon" ;
+                                                               rdf:rest rdf:nil
+                                                             ]
+                                                  ]
+                                       ]
+                           ] ;
+                dc:description "Responsibility of the management role"@en ;
+                rdfs:label "management responsibility"@en .
+
+
+###  http://readit-project/ontology/target
+:target rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Crowdsourcing ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                     owl:oneOf [ rdf:type rdf:List ;
+                                 rdf:first "external" ;
+                                 rdf:rest [ rdf:type rdf:List ;
+                                            rdf:first "internal" ;
+                                            rdf:rest rdf:nil
+                                          ]
+                               ]
+                   ] ;
+        dc:description "The target of the crowdsourcing campaign: internal to the organization or external, such as customers, stakeholders or the general public"@en ;
+        rdfs:label "target audience"@en .
+
+
+###  http://readit-project/ontology/text
+:text rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Task ;
+      rdfs:range xsd:string ;
+      dc:description "TODO"@en ;
+      rdfs:label "text"@en .
+
+
+###  http://readit-project/ontology/thumbnail
+:thumbnail rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf sch:thumbnailURL ;
+           rdfs:domain :MediaResource ;
+           rdfs:range xsd:anyURI ;
+           dc:description "TODO"@en ;
+           rdfs:label "thumbnail url"@en .
+
+
+###  http://readit-project/ontology/title
+:title rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf sch:title ;
+       rdfs:domain :Resource ;
+       rdfs:range xsd:string ;
+       dc:description "TODO"@en ;
+       rdfs:label "title"@en .
+
+
+###  http://readit-project/ontology/typeOfCompensation
+:typeOfCompensation rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Resource ;
+                    rdfs:range [ rdf:type rdfs:Datatype ;
+                                 owl:oneOf [ rdf:type rdf:List ;
+                                             rdf:first "intangible" ;
+                                             rdf:rest [ rdf:type rdf:List ;
+                                                        rdf:first "tangible" ;
+                                                        rdf:rest rdf:nil
+                                                      ]
+                                           ]
+                               ] ;
+                    dc:description "The type of the resource collected of given as compensation: tangible or intangible"@en ;
+                    rdfs:label "type of compensation"@en .
+
+
+###  http://readit-project/ontology/typeOfOutcome
+:typeOfOutcome rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Resource ;
+               rdfs:range [ rdf:type rdfs:Datatype ;
+                            owl:oneOf [ rdf:type rdf:List ;
+                                        rdf:first "funding" ;
+                                        rdf:rest [ rdf:type rdf:List ;
+                                                   rdf:first "knowledge" ;
+                                                   rdf:rest [ rdf:type rdf:List ;
+                                                              rdf:first "supply" ;
+                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                         rdf:first "time" ;
+                                                                         rdf:rest rdf:nil
+                                                                       ]
+                                                            ]
+                                                 ]
+                                      ]
+                          ] ;
+               dc:description "Crowdsourcing requires or produces: knowledge, resource, funding or time"@en ;
+               rdfs:label "type of outcome"@en .
+
+
+###  http://readit-project/ontology/url
+:url rdf:type owl:DatatypeProperty ;
+     rdfs:subPropertyOf sch:url ;
+     rdfs:domain :Resource ;
+     rdfs:range xsd:anyURI ;
+     dc:description "TODO"@en ;
+     rdfs:label "url"@en .
+
+
+###  https://schema.org/abstract
+sch:abstract rdf:type owl:DatatypeProperty .
+
+
+###  https://schema.org/encodingFormat
+sch:encodingFormat rdf:type owl:DatatypeProperty .
+
+
+###  https://schema.org/identifier
+sch:identifier rdf:type owl:DatatypeProperty .
+
+
+###  https://schema.org/inLanguage
+sch:inLanguage rdf:type owl:DatatypeProperty .
+
+
+###  https://schema.org/text
+sch:text rdf:type owl:DatatypeProperty .
+
+
+###  https://schema.org/thumbnailURL
+sch:thumbnailURL rdf:type owl:DatatypeProperty .
+
+
+###  https://schema.org/title
+sch:title rdf:type owl:DatatypeProperty .
+
+
+###  https://schema.org/url
+sch:url rdf:type owl:DatatypeProperty .
+
 
 #################################################################
 #    Classes
 #################################################################
 
-### http://readit-project/ontology/TemporalEntity
-:TemporalEntity rdf:type owl:Class ;
-  rdfs:subClassOf time:TemporalEntity ;
-  dc:description "A temporal interval or instant."@en ;
-  rdfs:label "Temporal entity"@en .
+###  http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Activity
+actr:Activity rdf:type owl:Class .
 
-### http://readit-project/ontology/Agent
-:Agent rdf:type owl:Class ;
-  rdfs:subClassOf activ:Agent ;
-  rdfs:subClassOf prov:Agent ;
-  dc:description "Entity that can perform activities."@en ;
-  rdfs:label "Agent"@en .
 
-### http://readit-project/ontology/Activity
+###  http://descartes-core.org/ontologies/activities/1.0/ActivityPattern.owl#Outcome
+actr:Outcome rdf:type owl:Class .
+
+
+###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Activity
+activ:Activity rdf:type owl:Class .
+
+
+###  http://ontology.eil.utoronto.ca/icity/ActivitySpecification/Agent
+activ:Agent rdf:type owl:Class .
+
+
+###  http://readit-project/ontology/Activity
 :Activity rdf:type owl:Class ;
-  rdfs:subClassOf prov:Activity ;
-  rdfs:subClassOf :TemporalEntity ;
-  rdfs:subClassOf sch:Event ;
-  rdfs:subClassOf actr:Activity ;
-  rdfs:subClassOf activ:Activity ;
-  rdfs:subClassOf or:Activity ;
-  dc:description "Set of tasks aimed to collect resources from users."@en ;
-  rdfs:label "Crowdsourcing Activity"@en .
+          rdfs:subClassOf actr:Activity ,
+                          activ:Activity ,
+                          :TemporalEntity ,
+                          provo:Activity ,
+                          sch:Event ;
+          dc:description "Set of tasks aimed to collect resources from users."@en ;
+          rdfs:label "Crowdsourcing Activity"@en .
 
-### http://readit-project/ontology/Organization
-:Organization rdf:type owl:Class ;
-  rdfs:subClassOf sch:Organization ;
-  rdfs:subClassOf activ:Agent ;
-  dc:description "Organised group of agents."@en ;
-  rdfs:label "Organization"@en .
 
-### http://readit-project/ontology/Person
-:Person rdf:type owl:Class ;
-  rdfs:subClassOf sch:Person ;
-  rdfs:subClassOf activ:Agent ;
-  dc:description "Human agent."@en ;
-  rdfs:label "Person"@en .
+###  http://readit-project/ontology/Agent
+:Agent rdf:type owl:Class ;
+       rdfs:subClassOf activ:Agent ,
+                       provo:Agent ;
+       dc:description "Entity that can perform activities."@en ;
+       rdfs:label "Agent"@en .
 
-### http://readit-project/ontology/Role
-:Role rdf:type owl:Class ;
-  rdfs:subClassOf time:TemporalEntity ;
-  rdfs:subClassOf or:Role ;
-  dc:description "Function of an agent within an organization or an activity."@en ;
-  rdfs:label "Role"@en .
 
-### http://readit-project/ontology/Crowdsourcing
-:Crowdsourcing rdf:type owl:Class ;
-  rdfs:subClassOf :Activity ;
-  dc:description "A crowdsourcing campaign of an organization."@en ;
-  rdfs:label "Crowdsourcing Campaign"@en .
-
-### http://readit-project/ontology/Task
-:Task rdf:type owl:Class ;
-  rdfs:subClassOf tr:Task ;
-  rdfs:subClassOf :Activity ;
-  dc:description "Action required as part of an activity."@en ;
-  rdfs:label "Crowdsourcing Task"@en .
-
-### http://readit-project/ontology/Resource
-:Resource rdf:type owl:Class ;
-  rdfs:subClassOf actr:Outcome ;
-  rdfs:subClassOf prov:Entity ;
-  dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
-  rdfs:label "Resource"@en .
-
-### http://readit-project/ontology/MediaObject
-:MediaResource rdf:type owl:Class ;
-  rdfs:subClassOf :Resource ;
-  rdfs:subClassOf sch:MediaObject ;
-  dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
-  rdfs:label "Media Resource"@en .
-
-### http://readit-project/ontology/Management
-:Management rdf:type owl:Class ;
-  rdfs:subClassOf or:Role ;
-  dc:description "Management role of the crowdsourcing campaign"@en ;
-  rdfs:label "Campaign Management"@en .
-
-### http://readit-project/ontology/Contributor
-:Contributor rdf:type owl:Class ;
-  rdfs:subClassOf or:Role ;
-  dc:description "Contributor role of person to the crowdsourcing campaign or task"@en ;
-  rdfs:label "Crowdsource Contributor"@en .
-
-### http://readit-project/ontology/Outcome
-:Outcome rdf:type owl:Class ;
-  rdfs:subClassOf actr:Outcome ;
-  dc:description "Entity result of an activity."@en ;
-  rdfs:label "Activity Outcome"@en .
-
-### http://readit-project/ontology/Question
-:Question rdf:type owl:Class ;
-  rdfs:subClassOf sch:Question ;
-  rdfs:subClassOf eo:Prompting ;
-  rdfs:subClassOf :Task ;
-  dc:description "Crowdsourcing task formulated as a question."@en ;
-  rdfs:label "Prompting Question"@en .
-
-### http://readit-project/ontology/Answer
+###  http://readit-project/ontology/Answer
 :Answer rdf:type owl:Class ;
-  rdfs:subClassOf sch:Answer ;
-  rdfs:subClassOf eo:Observation ;
-  rdfs:subClassOf oa:Annotation ;
-  dc:description "User answer to a question task."@en ;
-  rdfs:label "Crowdsourced Answer"@en .
+        rdfs:subClassOf oa:Annotation ,
+                        sch:Answer ;
+        dc:description "User answer to a question task."@en ;
+        rdfs:label "Crowdsourced Answer"@en ;
+        rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Observation"^^xsd:anyURI .
 
-### http://readit-project/ontology/CreativeWork
+
+###  http://readit-project/ontology/Concept
+:Concept rdf:type owl:Class ;
+         rdfs:subClassOf skos:Concept ,
+                         reo:Thing ;
+         dc:description "Abstract entity such as ideas."@en ;
+         rdfs:label "Experiential Concept"@en .
+
+
+###  http://readit-project/ontology/Contributor
+:Contributor rdf:type owl:Class ;
+             rdfs:subClassOf dul:Role ;
+             dc:description "Contributor role of person to the crowdsourcing campaign or task"@en ;
+             rdfs:label "Crowdsource Contributor"@en .
+
+
+###  http://readit-project/ontology/Crowdsourcing
+:Crowdsourcing rdf:type owl:Class ;
+               rdfs:subClassOf :Activity ;
+               dc:description "A crowdsourcing campaign of an organization."@en ;
+               rdfs:label "Crowdsourcing Campaign"@en .
+
+
+###  http://readit-project/ontology/Engagement
+:Engagement rdf:type owl:Class ;
+            rdfs:subClassOf :Event ,
+                            :TemporalEntity ;
+            dc:description "Enagement represents the involvement of a Person in an Activity. Engagement is the reification of the relations between Actor, Activity and Observation, as an Observation is a reflection on neither the Person or Activity individually, but it is a reflection on the Engagement (of a Person in an Activity)."@en ;
+            rdfs:label "Activity Engagement"@en ;
+            rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Engagement"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/Event
+:Event rdf:type owl:Class .
+
+
+###  http://readit-project/ontology/Management
+:Management rdf:type owl:Class ;
+            rdfs:subClassOf dul:Role ;
+            dc:description "Management role of the crowdsourcing campaign"@en ;
+            rdfs:label "Campaign Management"@en .
+
+
+###  http://readit-project/ontology/MediaResource
+:MediaResource rdf:type owl:Class ;
+               rdfs:subClassOf :Resource ,
+                               sch:MediaObject ;
+               dc:description "A resource collected through a crowdsource task or given as a compensation"@en ;
+               rdfs:label "Media Resource"@en .
+
+
+###  http://readit-project/ontology/Observation
+:Observation rdf:type owl:Class ;
+             rdfs:subClassOf :Outcome ,
+                             :TemporalEntity ;
+             dc:description "Testimony or evidence of an experience generated by a prompting activity."@en ;
+             rdfs:label "Experience Observation"@en ;
+             rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Observation"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/Organization
+:Organization rdf:type owl:Class ;
+              rdfs:subClassOf activ:Agent ,
+                              sch:Organization ;
+              dc:description "Organised group of agents."@en ;
+              rdfs:label "Organization"@en .
+
+
+###  http://readit-project/ontology/Outcome
+:Outcome rdf:type owl:Class ;
+         rdfs:subClassOf actr:Outcome ;
+         dc:description "Entity result of an activity."@en ;
+         rdfs:label "Activity Outcome"@en .
+
+
+###  http://readit-project/ontology/Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf activ:Agent ,
+                        sch:Person ;
+        dc:description "Human agent."@en ;
+        rdfs:label "Person"@en .
+
+
+###  http://readit-project/ontology/Prompting
+:Prompting rdf:type owl:Class ;
+           dc:description "Activity aimed to generate an Observation as outcome."@en ;
+           rdfs:label "Observation Prompting"@en ;
+           rdfs:seeAlso "http://modellingdh.github.io/ont/odp/term/Prompt"^^xsd:anyURI .
+
+
+###  http://readit-project/ontology/Question
+:Question rdf:type owl:Class ;
+          rdfs:subClassOf :Task ,
+                          sch:Question ;
+          dc:description "Crowdsourcing task formulated as a question."@en ;
+          rdfs:label "Prompting Question"@en .
+
+
+###  http://readit-project/ontology/Resource
 :Resource rdf:type owl:Class ;
-  rdfs:subClassOf sch:CreativeWork ;
-  dc:description "Entity generated by a crowdsourcing activity."@en ;
-  rdfs:label "Crowdsourced Resource"@en .
+          rdfs:subClassOf actr:Outcome ,
+                          provo:Entity ,
+                          sch:CreativeWork ;
+          dc:description "A resource collected through a crowdsource task or given as a compensation"@en ,
+                         "Entity generated by a crowdsourcing activity."@en ;
+          rdfs:label "Crowdsourced Resource"@en ,
+                     "Resource"@en .
 
-### http://readit-project/ontology/Concept
-:Concept rdf:Type owl:Class ;
-  rdfs:subClassOf skos:Concept ;
-  rdfs:subClassOf reo:Thing ;
-  dc:description "Abstract entity such as ideas."@en ;
-  rdfs:label "Experiential Concept"@en .
 
-### http://readit-project/ontology/Prompting
-:Prompting rdf:Type owl:Class ;
-  rdfs:subClassOf eo:Prompting ;
-  dc:description "Activity aimed to generate an Observation as outcome."@en ;
-  rdfs:label "Observation Prompting"@en .
+###  http://readit-project/ontology/Role
+:Role rdf:type owl:Class ;
+      rdfs:subClassOf dul:Role ,
+                      time:TemporalEntity ;
+      dc:description "Function of an agent within an organization or an activity."@en ;
+      rdfs:label "Role"@en .
 
-### http://readit-project/ontology/Observation
-:Observation rdf:Type owl:Class ;
-  rdfs:subClassOf :TemporalEntity ;
-  rdfs:subClassOf :Outcome ;
-  rdfs:subClassOf eo:Observation ;
-  dc:description "Testimony or evidence of an experience generated by a prompting activity."@en ;
-  rdfs:label "Experience Observation"@en .
 
-### http://readit-project/ontology/Engagement
-:Engagement rdf:Type owl:Class ;
-  rdfs:subClassOf :TemporalEntity ;
-  rdfs:subClassOf :Event ;
-  rdfs:subClassOf eo:Engagement ;
-  dc:description "Enagement represents the involvement of a Person in an Activity. Engagement is the reification of the relations between Actor, Activity and Observation, as an Observation is a reflection on neither the Person or Activity individually, but it is a reflection on the Engagement (of a Person in an Activity)."@en ;
-  rdfs:label "Activity Engagement"@en .
+###  http://readit-project/ontology/Task
+:Task rdf:type owl:Class ;
+      rdfs:subClassOf :Activity ,
+                      dul:Task ;
+      dc:description "Action required as part of an activity."@en ;
+      rdfs:label "Crowdsourcing Task"@en .
 
-### http://readit-project/ontology/Experience
-reo:ReadingExperience rdf:Type owl:Class ;
-  rdfs:subClassOf :Engagement .
+
+###  http://readit-project/ontology/TemporalEntity
+:TemporalEntity rdf:type owl:Class ;
+                rdfs:subClassOf time:TemporalEntity ;
+                dc:description "A temporal interval or instant."@en ;
+                rdfs:label "Temporal entity"@en .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role
+dul:Role rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task
+dul:Task rdf:type owl:Class .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:Class .
+
+
+###  http://www.w3.org/2006/time#TemporalEntity
+time:TemporalEntity rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#Annotation
+oa:Annotation rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Activity
+provo:Activity rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Agent
+provo:Agent rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Entity
+provo:Entity rdf:type owl:Class .
+
+
+###  https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#ReadingExperience
+reo:ReadingExperience rdf:type owl:Class ;
+                      rdfs:subClassOf :Engagement .
+
+
+###  https://raw.githubusercontent.com/eureadit/reading-experience-ontology/master/data-model-v2.owl#Thing
+reo:Thing rdf:type owl:Class .
+
+
+###  https://schema.org/Answer
+sch:Answer rdf:type owl:Class .
+
+
+###  https://schema.org/CreativeWork
+sch:CreativeWork rdf:type owl:Class .
+
+
+###  https://schema.org/Event
+sch:Event rdf:type owl:Class .
+
+
+###  https://schema.org/MediaObject
+sch:MediaObject rdf:type owl:Class .
+
+
+###  https://schema.org/Organization
+sch:Organization rdf:type owl:Class .
+
+
+###  https://schema.org/Person
+sch:Person rdf:type owl:Class .
+
+
+###  https://schema.org/Question
+sch:Question rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://modellingdh.github.io/ont/crowdsourcing-evidences
+<http://modellingdh.github.io/ont/crowdsourcing-evidences> rdf:type owl:NamedIndividual ;
+                                                           dc:creator <https://orcid.org/0000-0002-3639-3622> ,
+                                                                      <https://orcid.org/0000-0002-9272-908X> ,
+                                                                      <https://orcid.org/0000-0003-3807-5019> .
+
+
+###  https://orcid.org/0000-0002-3639-3622
+<https://orcid.org/0000-0002-3639-3622> rdf:type owl:NamedIndividual .
+
+
+###  https://orcid.org/0000-0002-9272-908X
+<https://orcid.org/0000-0002-9272-908X> rdf:type owl:NamedIndividual .
+
+
+###  https://orcid.org/0000-0003-3807-5019
+<https://orcid.org/0000-0003-3807-5019> rdf:type owl:NamedIndividual .
 
 
 #################################################################
@@ -748,9 +1054,12 @@ reo:ReadingExperience rdf:Type owl:Class ;
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Agent
+  owl:members ( :Activity
+                :Agent
                 :Organization
                 :Role
-                :Activity
               )
 ] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
